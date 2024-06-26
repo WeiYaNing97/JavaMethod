@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="JavaMethod-method" />
+        <module name="JavaMethod-example" />
+        <module name="JavaMethod-userLogin" />
+        <module name="JavaMethod-admin" />
+        <module name="JavaMethod-utils" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="JavaMethod" target="8" />
+      <module name="JavaMethod-admin" target="8" />
+      <module name="JavaMethod-example" target="8" />
+      <module name="JavaMethod-method" target="8" />
+      <module name="JavaMethod-userLogin" target="8" />
+      <module name="JavaMethod-utils" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="JavaMethod-admin" options="-parameters" />
+      <module name="JavaMethod-example" options="-parameters" />
+      <module name="JavaMethod-method" options="-parameters" />
+      <module name="JavaMethod-userLogin" options="-parameters" />
+      <module name="JavaMethod-utils" options="-parameters" />
+    </option>
+  </component>
+</project>
