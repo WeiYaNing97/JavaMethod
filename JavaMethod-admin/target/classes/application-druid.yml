@@ -1,0 +1,4 @@
+obtain:
+  ymlfile:
+    values: '使用注解获取yml文件参数值'
+    time: 1
