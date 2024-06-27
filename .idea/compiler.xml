@@ -9,18 +9,10 @@
         <module name="JavaMethod-method" />
         <module name="JavaMethod-example" />
         <module name="JavaMethod-userLogin" />
-        <module name="JavaMethod-admin" />
         <module name="JavaMethod-utils" />
+        <module name="JavaMethod-admin" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="JavaMethod" target="8" />
-      <module name="JavaMethod-admin" target="8" />
-      <module name="JavaMethod-example" target="8" />
-      <module name="JavaMethod-method" target="8" />
-      <module name="JavaMethod-userLogin" target="8" />
-      <module name="JavaMethod-utils" target="8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

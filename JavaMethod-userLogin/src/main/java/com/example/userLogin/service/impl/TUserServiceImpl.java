@@ -3,13 +3,10 @@ package com.example.userLogin.service.impl;
 import com.example.userLogin.domain.TUser;
 import com.example.userLogin.mapper.TUserMapper;
 import com.example.userLogin.service.ITUserService;
-import com.example.utils.DateUtils;
 import com.example.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**

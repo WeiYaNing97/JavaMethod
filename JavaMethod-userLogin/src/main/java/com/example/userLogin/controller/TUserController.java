@@ -3,22 +3,15 @@ package com.example.userLogin.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.method.jwt.TokenService;
 import com.example.method.login.LoginUser;
 import com.example.userLogin.domain.TUser;
 import com.example.userLogin.service.ITUserService;
-import com.example.utils.EncryptionAlgorithm;
-import io.jsonwebtoken.Claims;
+import com.example.util.EncryptionAlgorithm;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.NoSuchAlgorithmException;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Enumeration;
-
-import static java.lang.System.err;
 
 /**
  * 用户登录信息表Controller

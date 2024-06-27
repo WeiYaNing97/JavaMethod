@@ -1,6 +1,8 @@
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\http\MyInterceptor.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\controller\MyTest.java
+D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\file\ReadFromFile.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\redis\RedisConfig.java
+D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\file\WriteToFile.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\redis\RedisService.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\jwt\TokenService.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\log\LogUtils.java

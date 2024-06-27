@@ -1,7 +1,7 @@
 package com.example.uuid;
 
 
-import com.example.utils.UtilException;
+import com.example.util.UtilException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
