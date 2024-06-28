@@ -1,4 +1,4 @@
-package com.example;
+package com.example.instance.applicationListener;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -14,16 +14,9 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-@Order(1)
-public class ExecuteAfterStartup implements ApplicationListener<ApplicationReadyEvent> {
+@Order(2)
+public class ExecuteAfterStartupTwo implements ApplicationListener<ApplicationReadyEvent> {
 
-    /**
-     * 使用注解获取yml文件参数值。
-     * 注解：@Value("${一级属性名.二级属性名.三级属性名}"),直接将注解应用到需要该参数的类的对象上.
-     * 也可以使用单独的配置类，但是需要特定方法。*/
-    @Value("${obtain.ymlfile.values}")
-
-    private String obtainymlfilevalues;
 
     /**
      * 在应用程序准备完毕后执行的方法。
@@ -36,9 +29,7 @@ public class ExecuteAfterStartup implements ApplicationListener<ApplicationReady
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
-        System.err.println("项目启动后立即执行方法");
-
-        System.err.println(obtainymlfilevalues);
+        System.err.println("第二个项目启动后立即执行类");
 
     }
 

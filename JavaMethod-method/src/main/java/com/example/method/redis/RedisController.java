@@ -1,6 +1,5 @@
-package com.example.method.controller;
+package com.example.method.redis;
 
-import com.example.method.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
