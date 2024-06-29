@@ -1,14 +1,13 @@
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\http\MyInterceptor.java
-D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\controller\MyTest.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\file\ReadFromFile.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\redis\RedisConfig.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\file\WriteToFile.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\redis\RedisService.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\jwt\TokenService.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\log\LogUtils.java
-D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\controller\RedisController.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\http\WebConfig.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\result\HttpStatus.java
+D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\redis\RedisController.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\result\AjaxResult.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\login\LoginBody.java
 D:\JavaProject\JavaMethod\JavaMethod-method\src\main\java\com\example\method\login\LoginUser.java
