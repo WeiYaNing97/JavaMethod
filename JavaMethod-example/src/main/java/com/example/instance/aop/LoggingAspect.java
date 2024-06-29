@@ -66,35 +66,35 @@ public class LoggingAspect {
 
 
     // 前置通知
-    @Before("execution(* com.example..*.*(..))")
+    @Before("execution(* com.example..service.*.*(..))")
     public void beforeAdvice(JoinPoint joinPoint) {
-        logger.info("Before method: " + joinPoint.getSignature());
+        logger.info("(前置通知) Before method: " + joinPoint.getSignature());
     }
 
     // 后置通知
-    @AfterReturning(pointcut = "execution(* com.example..*.*(..))", returning = "result")
+    @AfterReturning(pointcut = "execution(* com.example..service.*.*(..))", returning = "result")
     public void afterReturningAdvice(JoinPoint joinPoint, Object result) {
-        logger.info("After returning method: " + joinPoint.getSignature() + " with result: " + result);
+        logger.info("(后置通知) After returning method: " + joinPoint.getSignature() + " with result: " + result);
     }
 
     // 异常通知
-    @AfterThrowing(pointcut = "execution(* com.example..*.*(..))", throwing = "ex")
+    @AfterThrowing(pointcut = "execution(* com.example..service.*.*(..))", throwing = "ex")
     public void afterThrowingAdvice(JoinPoint joinPoint, Exception ex) {
-        logger.error("After throwing method: " + joinPoint.getSignature() + " with exception: " + ex);
+        logger.error("(异常通知) After throwing method: " + joinPoint.getSignature() + " with exception: " + ex);
     }
 
     // 最终通知
-    @After("execution(* com.example..*.*(..))")
+    @After("execution(* com.example..service.*.*(..))")
     public void afterAdvice(JoinPoint joinPoint) {
-        logger.info("After method: " + joinPoint.getSignature());
+        logger.info("(最终通知) After method: " + joinPoint.getSignature());
     }
 
     // 环绕通知
-    @Around("execution(* com.example..*.*(..))")
+    @Around("execution(* com.example..service.*.*(..))")
     public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
-        logger.info("Before method: " + joinPoint.getSignature());
+        logger.info("(环绕通知) Before method: " + joinPoint.getSignature());
         Object result = joinPoint.proceed();
-        logger.info("After method: " + joinPoint.getSignature());
+        logger.info("(环绕通知) After method: " + joinPoint.getSignature());
         return result;
     }
 }
