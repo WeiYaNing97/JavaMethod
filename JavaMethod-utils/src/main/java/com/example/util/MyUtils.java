@@ -247,6 +247,31 @@ public class MyUtils {
     }
     /* ============================== 实体类 结束 ==============================*/
     /* ============================== 字符串、文章 开始 ==============================*/
+
+    /**
+     * 使用Java 8 Stream API计算字符在字符串中出现的次数
+     *
+     * @param str 要搜索的字符串
+     * @param ch  要搜索的字符
+     * @return 字符在字符串中出现的次数，以整型形式返回
+     */
+    public static int countOccurrencesWithStream(String str, char ch) {
+        // 使用Java 8 Stream API计算字符在字符串中出现的次数
+        long count = str.chars()
+                // 过滤出与给定字符相等的字符
+                .filter(c -> c == ch)
+                // 计算过滤后的字符数量
+                .count();
+        // 将长整型转换为整型返回
+        return (int) count;
+    }
+    /**
+     * 根据多个关键字分割字符串
+     *
+     * @param keywords 要分割字符串的关键字数组
+     * @param input 要分割的输入字符串
+     * @return 字符串分割后得到的数组
+     */
     public static String[] splittingStringsBasedOnMultipleKeywords(String[] keywords,String input) {
         StringBuilder regexBuilder = new StringBuilder();
         for (int i = 0; i < keywords.length; i++) {
@@ -617,6 +642,36 @@ public class MyUtils {
         // 使用Matcher对象的find()方法判断是否存在IP特征
         return matcher.find();
     }
+
+    /**
+     * 将IP地址和子网掩码转换为CIDR表示法的字符串。
+     *
+     * @param ipAddress IP地址，格式为xxx.xxx.xxx.xxx
+     * @param subnetMask 子网掩码，格式为xxx.xxx.xxx.xxx
+     * @return 返回CIDR表示法的IP地址，格式为xxx.xxx.xxx.xxx/xx
+     * @throws IllegalArgumentException 如果IP地址或子网掩码格式无效，则抛出此异常
+     */
+    public static String convertToCIDR(String ipAddress, String subnetMask) {
+        // 将IP地址和子网掩码分为四部分
+        String[] ipParts = ipAddress.split("\\.");
+        String[] maskParts = subnetMask.split("\\.");
+
+        // 验证IP地址和子网掩码是否有效
+        if (ipParts.length != 4 || maskParts.length != 4) {
+            throw new IllegalArgumentException("Invalid IP address or subnet mask format.");
+        }
+
+        // 计算子网掩码中'1'的个数，从而得到网络前缀的长度
+        int prefixLength = 0;
+        for (int i = 0; i < 4; i++) {
+            int maskPart = Integer.parseInt(maskParts[i]);
+            prefixLength += Integer.bitCount(maskPart);
+        }
+
+        // 返回CIDR表示法的IP地址
+        return ipAddress + "/" + prefixLength;
+    }
+
     /* ============================== IP 结束 ==============================*/
 
 }

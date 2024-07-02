@@ -1,11 +1,15 @@
 package com.example.instance.aop;
 
 
+import com.example.method.file.WriteToFile;
+import com.example.method.log.LogUtils;
+import com.example.util.DateUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,6 +37,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
+
+    @Value("${obtain.ymlfile.logPath}")
+
+    private String logPath;
+
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
     /**
@@ -66,9 +75,18 @@ public class LoggingAspect {
 
 
     // 前置通知
+    // 使用execution表达式定义切点，匹配com.example包及其所有子包下的service包中的任意类的任意方法
+    // 前置通知将在目标方法执行之前执行
     @Before("execution(* com.example..service.*.*(..))")
     public void beforeAdvice(JoinPoint joinPoint) {
+        // 记录日志，输出正在执行的前置通知方法的信息
         logger.info("(前置通知) Before method: " + joinPoint.getSignature());
+
+        // 获取当前时间的日志信息
+        String info = LogUtils.getInfo(DateUtils.getTime());
+        // 拼接日志信息，并输出到日志文件中
+        String information = info + "(前置通知) Before method: " + joinPoint.getSignature();
+        WriteToFile.writeString(information,logPath+"/log.txt");
     }
 
     // 后置通知
@@ -78,9 +96,20 @@ public class LoggingAspect {
     }
 
     // 异常通知
+    // 当执行com.example包下service包中任意类的任意方法并抛出异常时，触发此通知
     @AfterThrowing(pointcut = "execution(* com.example..service.*.*(..))", throwing = "ex")
     public void afterThrowingAdvice(JoinPoint joinPoint, Exception ex) {
+        // 记录日志，打印异常信息
         logger.error("(异常通知) After throwing method: " + joinPoint.getSignature() + " with exception: " + ex);
+
+        // 获取当前时间的警告信息
+        String warning = LogUtils.getWarning(DateUtils.getTime());
+
+        // 拼接日志信息
+        String information = warning + "(异常通知) After throwing method: " + joinPoint.getSignature() + " with exception: " + ex;
+
+        // 将日志信息写入到文件中
+        WriteToFile.writeString(information,logPath+"/log.txt");
     }
 
     // 最终通知
@@ -97,4 +126,5 @@ public class LoggingAspect {
         logger.info("(环绕通知) After method: " + joinPoint.getSignature());
         return result;
     }
+
 }

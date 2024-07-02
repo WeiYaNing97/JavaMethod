@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.SecureRandom;
@@ -135,6 +136,12 @@ public class VerifyCodeUtils
 
         g2.dispose();
         ImageIO.write(image, "jpg", os);
+
+        // 指定保存到本地的文件路径
+        /*String filePath = "D:\\home\\JavaMethod\\image.jpg";
+        File outputfile = new File(filePath);
+        ImageIO.write(image, "jpg", outputfile);*/
+
     }
 
     private static Color getRandColor(int fc, int bc)
