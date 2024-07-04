@@ -248,6 +248,17 @@ public class MyUtils {
     /* ============================== 实体类 结束 ==============================*/
     /* ============================== 字符串、文章 开始 ==============================*/
 
+    public static String splicingStringsWithTheSameCharacter(String str, int number) {
+        if (number == 0){
+            return null;
+        }
+        String returnStr = "";
+        for (int i = 0 ;i < number ;i++){
+            returnStr += str;
+        }
+        return returnStr;
+    }
+
     /**
      * 使用Java 8 Stream API计算字符在字符串中出现的次数
      *
@@ -671,7 +682,65 @@ public class MyUtils {
         // 返回CIDR表示法的IP地址
         return ipAddress + "/" + prefixLength;
     }
+    /**
+     * 将IPv4地址转换为二进制字符串表示。
+     *
+     * @param ip 要转换的IPv4地址，格式为xxx.xxx.xxx.xxx
+     * @return 转换后的二进制字符串，长度为32位
+     * @throws NumberFormatException 如果输入的IP地址不符合IPv4格式
+     */
+    public static String getIPBinarySystem(String ip) {
+        // 使用点号将IP地址分割为数组
+        String[] ip_split = ip.split("\\.");
+        String ip_CIDR="";
+        // 遍历每个IP地址段
+        for (int i = 0; i < ip_split.length; i++) {
+            // 将整数转换为二进制字符串
+            String binaryString = Integer.toBinaryString(Integer.valueOf(ip_split[i]).intValue());
+            // 补全后面的零
+            String paddedBinaryString = String.format("%" + 8 + "s", binaryString).replace(' ', '0');
+            // 将补全后的二进制字符串添加到结果中
+            ip_CIDR += paddedBinaryString;
+        }
+        // 返回最终的二进制字符串
+        return ip_CIDR;
+    }
 
+    public static String obtainIPBasedOnBinary(String binarySystem) {
+        String ipBinarySystem = stringInsertionInterval(binarySystem, ".", 8);
+        String[] ipBinarySystemSplit = ipBinarySystem.split("\\.");
+        String ip ="";
+        for (String value:ipBinarySystemSplit){
+            ip += Integer.parseInt(value,2) + ".";
+        }
+        return ip.substring(0,ip.length()-1);
+    }
+
+    public static String stringInsertionInterval(String information,String delimiter,int number) {
+        String returnStr = "";
+        while (information.length() >= number){
+            returnStr += information.substring(0,number) + delimiter;
+            information = information.substring(number,information.length());
+        }
+        if (information.length() == 0 && returnStr.endsWith(delimiter)){
+            returnStr = returnStr.substring(0,returnStr.length()-delimiter.length());
+        }else if (information.length() != 0){
+            returnStr = returnStr + information;
+        }
+        return returnStr;
+    }
+
+    /* 二进制字符串与逻辑 */
+    public static String binaryStringsAndLogic(String ip,String mask) {
+        // 将二进制字符串转换为整数
+        int num1 = Integer.parseInt(ip, 2);
+        int num2 = Integer.parseInt(mask, 2);
+
+        // 进行与运算
+        int result = num1 & num2;
+
+        // 将结果转换回二进制字符串
+        return Integer.toBinaryString(result);
+    }
     /* ============================== IP 结束 ==============================*/
-
 }

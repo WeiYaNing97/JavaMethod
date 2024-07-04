@@ -1,5 +1,6 @@
 package com.example.test.ip;
 import com.example.test.pojo.IPBlock;
+import com.example.util.MyUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +16,16 @@ public class IPAggregation {
     public static void main(String[] args) {
         // 示例输入
         List<String> ipBlocks = new ArrayList<>();
-        ipBlocks.add("212.56.132.0/24");
-        ipBlocks.add("212.56.133.0/24");
-        ipBlocks.add("212.56.134.0/24");
-        ipBlocks.add("212.56.135.0/24");
+        ipBlocks.add("212.56.1.0/24");
+        ipBlocks.add("212.56.2.0/24");
+        ipBlocks.add("212.56.3.0/24");
+        ipBlocks.add("212.56.4.0/23");
+        ipBlocks.add("212.56.5.0/24");
+        ipBlocks.add("212.56.6.0/24");
+        ipBlocks.add("212.56.7.0/24");
+        ipBlocks.add("212.56.8.0/24");
+        ipBlocks.add("212.56.9.0/24");
+        ipBlocks.add("212.56.10.0/24");
 
         IPBlock ipBlock = aggregateRoutes(ipBlocks);
         System.out.println(ipBlock.getCIDR());
@@ -37,7 +44,7 @@ public class IPAggregation {
             // 将每个IP地址块转换为IPBlock对象
             blocks[i] = new IPBlock(ipBlocks.get(i));
             // 将IP地址转换为二进制系统
-            blocks[i].setIp(getBinarySystem(blocks[i].getIp()));
+            blocks[i].setIp(MyUtils.stringInsertionInterval(MyUtils.getIPBinarySystem(blocks[i].getIp()),".",8));
         }
 
         // 打印转换后的二进制IP地址
@@ -89,29 +96,7 @@ public class IPAggregation {
     }
 
 
-    /**
-     * 将IPv4地址转换为二进制字符串表示。
-     *
-     * @param ip 要转换的IPv4地址，格式为xxx.xxx.xxx.xxx
-     * @return 转换后的二进制字符串，长度为32位
-     * @throws NumberFormatException 如果输入的IP地址不符合IPv4格式
-     */
-    public static String getBinarySystem(String ip) {
-        // 使用点号将IP地址分割为数组
-        String[] ip_split = ip.split("\\.");
-        String ip_CIDR="";
-        // 遍历每个IP地址段
-        for (int i = 0; i < ip_split.length; i++) {
-            // 将整数转换为二进制字符串
-            String binaryString = Integer.toBinaryString(Integer.valueOf(ip_split[i]).intValue());
-            // 补全后面的零
-            String paddedBinaryString = String.format("%" + 8 + "s", binaryString).replace(' ', '0');
-            // 将补全后的二进制字符串添加到结果中
-            ip_CIDR += paddedBinaryString +".";
-        }
-        // 返回最终的二进制字符串
-        return ip_CIDR.substring(0,ip_CIDR.length()-1);
-    }
+
 
     /**
      * 返回给定IP地址列表中具有最大相同前缀的IP地址。

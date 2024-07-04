@@ -31,4 +31,12 @@ public class IPBlock {
     public String getCIDR() {
         return ip+"/"+prefix;
     }
+
+    @Override
+    public String toString() {
+        return "IPBlock{" +
+                "ip='" + ip + '\'' +
+                ", prefix=" + prefix +
+                '}';
+    }
 }
