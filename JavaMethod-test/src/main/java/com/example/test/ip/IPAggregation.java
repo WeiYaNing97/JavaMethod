@@ -38,6 +38,11 @@ public class IPAggregation {
      * @return 聚合后的IPBlock对象，包含具有最大相同前缀的IP地址和前缀长度
      */
     public static IPBlock aggregateRoutes(List<String> ipBlocks) {
+
+        if (ipBlocks.size()==1){
+            return new IPBlock(ipBlocks.get(0));
+        }
+
         // 转换输入为IPBlock对象数组，便于处理
         IPBlock[] blocks = new IPBlock[ipBlocks.size()];
         for (int i = 0; i < ipBlocks.size(); i++) {
