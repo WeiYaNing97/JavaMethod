@@ -250,7 +250,7 @@ public class MyUtils {
 
     public static String splicingStringsWithTheSameCharacter(String str, int number) {
         if (number == 0){
-            return null;
+            return "";
         }
         String returnStr = "";
         for (int i = 0 ;i < number ;i++){
@@ -655,6 +655,26 @@ public class MyUtils {
     }
 
     /**
+     *  判断字符串中有几个IP特征数据,并返回ip数据
+     *  注意：超过255 不是ip 不会显示。测试时注意
+     * @param str
+     * @return
+     */
+    public static List<String> findIPs(String str) {
+        List<String> ips = new ArrayList<>();
+        //String regex = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+        Pattern pattern = Pattern.compile("(\\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b)");
+        //Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+
+        while (matcher.find()) {
+            ips.add(matcher.group());
+        }
+
+        return ips;
+    }
+
+    /**
      * 将IP地址和子网掩码转换为CIDR表示法的字符串。
      *
      * @param ipAddress IP地址，格式为xxx.xxx.xxx.xxx
@@ -742,5 +762,38 @@ public class MyUtils {
         // 将结果转换回二进制字符串
         return Integer.toBinaryString(result);
     }
+
+    /**
+     * 将IP地址字符串转换为long值。
+     * @param ipAddress IP地址字符串
+     * @return 转换后的long值
+     */
+    private static long ipToLong(String ipAddress) {
+        String[] parts = ipAddress.split("\\.");
+        return (Long.parseLong(parts[0]) << 24)
+                + (Long.parseLong(parts[1]) << 16)
+                + (Long.parseLong(parts[2]) << 8)
+                + Long.parseLong(parts[3]);
+    }
+
+    /**
+     * 比较两个IP地址的大小。
+     * @param ip1 第一个IP地址字符串
+     * @param ip2 第二个IP地址字符串
+     * @return 如果ip1 > ip2 返回1，如果ip1 < ip2 返回-1，否则返回0
+     */
+    public static int compareIP(String ip1, String ip2) {
+        long ip1Long = ipToLong(ip1);
+        long ip2Long = ipToLong(ip2);
+
+        if (ip1Long > ip2Long) {
+            return 1;
+        } else if (ip1Long < ip2Long) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
     /* ============================== IP 结束 ==============================*/
 }

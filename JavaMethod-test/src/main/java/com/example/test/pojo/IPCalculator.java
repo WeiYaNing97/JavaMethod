@@ -9,7 +9,7 @@ public class IPCalculator {
     /*掩码*/
     private String mask;
     /*可用地址*/
-    private String AvailableAddresses;
+    private Integer AvailableAddresses;
     /*网络号*/
     private String networkNumber;
     /*第一个可用:*/
@@ -27,11 +27,11 @@ public class IPCalculator {
         this.IPCIDR = IPCIDR;
     }
 
-    public String getAvailableAddresses() {
+    public Integer getAvailableAddresses() {
         return AvailableAddresses;
     }
 
-    public void setAvailableAddresses(String availableAddresses) {
+    public void setAvailableAddresses(Integer availableAddresses) {
         AvailableAddresses = availableAddresses;
     }
 

@@ -1,11 +1,20 @@
 package com.example.test.ip;
 
+import com.example.test.address.IPSubnetCalculator;
 import com.example.test.pojo.IPBlock;
 import com.example.test.pojo.IPCalculator;
 import com.example.util.MyUtils;
 
-/* ip 地址计算器 */
+/** ip 地址计算器 */
 public class IPAddressCalculator {
+
+    public static void main(String[] args) {
+        String cidr = "192.168.1.0/30";
+        IPCalculator calculator = Calculator(cidr);
+
+        System.out.println(calculator.toString());
+    }
+
     /* 计算器 */
     public static IPCalculator Calculator(String ipCIDR) {
         /* 根据 IP的CIDR格式 获取 ip和网络号位数 */
@@ -30,17 +39,27 @@ public class IPAddressCalculator {
         ipCalculator.setMask(maskPart1+hostNumber0);
 
         /* 并转化为2进制 查看网络号地址段有多少地址*/
-        int decimal = Integer.parseInt( hostNumber1 , 2);
+        int decimal = Integer.parseInt( hostNumber1==""?"0":hostNumber1, 2);
         /* 因为主机号全为1的情况为广播地址 要 -1*/
-        ipCalculator.setAvailableAddresses(decimal == 0 ? 0+"" : decimal-1+"");
+        ipCalculator.setAvailableAddresses(decimal == 0 ? 0 : decimal-1);
         /* 截取二进制IP 网络号部分*/
         String iPNetworkSection = ipCalculator.getIp().substring(0, ipBlock.getPrefix());
         /* 二进制IP网络号部分 加 主机号长度字符全为0的字符串*/
         ipCalculator.setNetworkNumber(iPNetworkSection + hostNumber0);
         /* 二进制IP网络号部分 加 主机号长度字符只有最后一位为1其余为0 的字符串*/
-        ipCalculator.setFirstAvailable(iPNetworkSection + hostNumber0.substring(0,hostNumber-1)+"1");
+        String firstAvailableHostNumber ="";
+        if (hostNumber0 != ""){
+            firstAvailableHostNumber = hostNumber0.substring(0,hostNumber-1)+"1";
+        }
+        ipCalculator.setFirstAvailable(iPNetworkSection + firstAvailableHostNumber );
+
         /* 二进制IP网络号部分 加 主机号长度字符只有最后一位为0其余为1 的字符串  去除了 广播地址*/
-        ipCalculator.setFinallyAvailable(iPNetworkSection + hostNumber1.substring(0,hostNumber-1)+"0");
+        String finallyAvailableHostNumber ="";
+        if (hostNumber0 != ""){
+            finallyAvailableHostNumber = hostNumber1.substring(0,hostNumber-1)+"0";
+        }
+        ipCalculator.setFinallyAvailable(iPNetworkSection + finallyAvailableHostNumber);
+
         /* 二进制IP网络号部分 加 主机号长度字符全为1的字符串 广播地址*/
         ipCalculator.setBroadcast(iPNetworkSection + hostNumber1);
 
