@@ -78,7 +78,7 @@ public class IpTest {
     public static void main(String[] args) {
 
         List<String> collect = Arrays.stream( returnString.split("\n") ).collect( Collectors.toList() );
-        List<List<String>> ipList = collect.stream().filter(s -> howManyIPFeatures(s).size()==2).map(s -> howManyIPFeatures(s)).collect(Collectors.toList());
+        List<List<String>> ipList = collect.stream().filter(s -> MyUtils.findIPs(s).size()==2).map(s -> MyUtils.findIPs(s)).collect(Collectors.toList());
 
         List<String> cidrList = new ArrayList<>();
         for (List<String> ips:ipList){
@@ -90,26 +90,5 @@ public class IpTest {
     }
 
 
-    /**
-     * 统计字符串中包含的IP地址特征，并将它们存储在一个列表中返回。
-     *
-     * @param information 包含IP地址特征的字符串
-     * @return 包含IP地址特征的列表
-     */
-    public static List<String> howManyIPFeatures(String information) {
-        // 将输入的字符串按照空格进行分割，得到一个字符串数组
-        String[] information_split = information.split(" ");
-        // 创建一个空的ArrayList，用于存储IP地址特征
-        List<String> ip_list = new ArrayList<>();
-        // 遍历字符串数组中的每个字符串
-        for (String ip:information_split) {
-            // 调用MyUtils类的containsIPAddress方法，判断当前字符串是否为IP地址特征
-            if (MyUtils.containsIPAddress(ip)) {
-                // 如果当前字符串是IP地址特征，则将其添加到ip_list列表中
-                ip_list.add(ip);
-            }
-        }
-        // 返回包含IP地址特征的列表
-        return ip_list;
-    }
+
 }

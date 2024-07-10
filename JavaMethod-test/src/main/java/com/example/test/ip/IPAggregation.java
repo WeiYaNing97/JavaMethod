@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 路由聚合
+ * 第一版
+ * 根据给出的地址列表，得出 一个路由聚合结果
  */
 public class IPAggregation {
 
@@ -82,9 +83,17 @@ public class IPAggregation {
      * @throws NumberFormatException 如果二进制字符串无法转换为整数，则抛出该异常
      */
     public static String convertBinaryToIP(String maximumSamePrefix) {
+        // 按照点号分割二进制字符串
         String[] split = maximumSamePrefix.split("\\.");
+
+        // 将分割后的二进制字符串转换为整数，并放入列表中
         List<Integer> ipList = Arrays.stream(split).map(x -> Integer.parseInt(padWithZeros(x), 2)).collect(Collectors.toList());
+
+        // 创建一个新的列表ips，用于存储IP地址的每个部分
         List<Integer> ips = new ArrayList<>();
+
+        // 遍历ipList列表，将其中的元素添加到ips列表中
+        // 如果ipList列表的长度小于4，则在ips列表中添加0
         for (int i = 0; i < 4; i++) {
             if (i<ipList.size()) {
                 ips.add(ipList.get(i));
@@ -93,12 +102,18 @@ public class IPAggregation {
             }
         }
 
+        // 初始化IP地址字符串
         String ip = "";
+
+        // 遍历ips列表，将每个元素转换为字符串，并添加点号
         for (int i = 0; i < ips.size(); i++) {
             ip += ips.get(i)+".";
         }
+
+        // 去掉最后一个点号，返回最终的IP地址字符串
         return ip.substring(0,ip.length()-1);
     }
+
 
 
 
@@ -140,14 +155,21 @@ public class IPAggregation {
      */
     public static String padWithZeros(String input) {
         int length = input.length();
+        // 如果输入字符串长度小于8位
         if (length < 8) {
+            // 创建一个StringBuilder对象，并将输入字符串放入其中
             StringBuilder sb = new StringBuilder(input);
+            // 循环8-输入字符串长度的次数
             for (int i = 0; i < 8 - length; i++) {
+                // 在StringBuilder对象后追加"0"
                 sb.append("0");
             }
+            // 将StringBuilder对象转换为字符串并返回
             return sb.toString();
+        // 如果输入字符串长度已经大于等于8位，则直接返回原字符串
         } else {
             return input;
         }
     }
+
 }
