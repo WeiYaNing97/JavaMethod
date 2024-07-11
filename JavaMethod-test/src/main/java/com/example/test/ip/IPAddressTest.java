@@ -45,7 +45,9 @@ public class IPAddressTest {
             List<IPBlock> ipBlockList = ipBlocks.stream().map(x -> new IPBlock(x)).collect(Collectors.toList());
 
             // 使用Collections.sort()方法对列表进行排序
-            Collections.sort(ipBlockList, Comparator.comparing(IPBlock::getIp));
+            // 使用Comparator按IP排序
+            Comparator<IPBlock> ipComparator = Comparator.comparing(IPBlock::getIp);
+            Collections.sort(ipBlockList, ipComparator);
 
             System.err.println("===================== "+ num +"===========================");
             ipBlockList.stream().forEach(x -> System.err.println(x.getIp() + "  " + x.getPrefix()));
@@ -100,10 +102,10 @@ public class IPAddressTest {
                     IPBlock ipBlock = ipBlocks.get(num);
                     // 从IP块列表中移除已处理的IP块
                     ipBlocks.removeIf(person -> person.getIp().equals(ipBlock.getIp()));
-                }else {
+                }/*else {
                     // 如果当前IP块地址在起始和结束IP地址之外，则跳出循环
                     break;
-                }
+                }*/
             }
 
         }

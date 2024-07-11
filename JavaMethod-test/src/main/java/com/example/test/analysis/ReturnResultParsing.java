@@ -71,7 +71,9 @@ public class ReturnResultParsing {
             List<IPBlock> ipBlockList = all.stream().map(x -> new IPBlock(x)).collect(Collectors.toList());
 
             // 使用Collections.sort()方法对列表进行排序
-            Collections.sort(ipBlockList, Comparator.comparing(IPBlock::getIp));
+
+            /*Comparator<IPBlock> ipComparator = Comparator.comparing(IPBlock::getIp);
+            Collections.sort(ipBlockList, ipComparator);*/
 
             all = IPAddressTest.getAggregation(ipBlockList,num).stream().collect(Collectors.toList());
 
