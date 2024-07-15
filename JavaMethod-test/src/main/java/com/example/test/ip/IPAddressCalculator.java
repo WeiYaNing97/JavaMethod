@@ -1,8 +1,8 @@
 package com.example.test.ip;
 
-import com.example.test.address.IPSubnetCalculator;
 import com.example.test.pojo.IPBlock;
 import com.example.test.pojo.IPCalculator;
+import com.example.test.pojo.IPInformation;
 import com.example.util.MyUtils;
 
 /** ip地址计算器
@@ -10,13 +10,12 @@ import com.example.util.MyUtils;
 public class IPAddressCalculator {
 
 
-    /**
-     * 返回一个计算给定IP和CIDR信息的IPCalculator对象
-     *
-     * @param ipCIDR 包含IP地址和CIDR信息的字符串，格式为"IP/CIDR"
-     * @return IPCalculator对象，包含IP地址、子网掩码、网络号、第一个可用的主机号、最后一个可用的主机号、广播地址等信息
-     */
-    public static IPCalculator Calculator(String ipCIDR) {
+
+    public static IPCalculator Calculator(IPInformation ipInformation) {
+
+        String ipCIDR = MyUtils.convertToCIDR(ipInformation.getIp(), ipInformation.getMask());
+
+
         // 创建IPBlock对象
         IPBlock ipBlock = new IPBlock(ipCIDR);
         // 创建IPCalculator对象
@@ -53,19 +52,11 @@ public class IPAddressCalculator {
         // 设置网络号
         ipCalculator.setNetworkNumber(iPNetworkSection + hostNumber0);
 
-        // 设置第一个可用的主机号
-        String firstAvailableHostNumber = "";
-        if (hostNumber0 != ""){
-            firstAvailableHostNumber = hostNumber0.substring(0,hostNumber-1)+"1";
-        }
-        ipCalculator.setFirstAvailable(iPNetworkSection + firstAvailableHostNumber );
+        // 设置第一台可用的地址
+        ipCalculator.setFirstAvailable(iPNetworkSection + hostNumber0 );
 
-        // 设置最后一个可用的主机号
-        String finallyAvailableHostNumber = "";
-        if (hostNumber0 != ""){
-            finallyAvailableHostNumber = hostNumber1.substring(0,hostNumber-1)+"0";
-        }
-        ipCalculator.setFinallyAvailable(iPNetworkSection + finallyAvailableHostNumber);
+        // 设置最后一台可用的地址
+        ipCalculator.setFinallyAvailable(iPNetworkSection + hostNumber1);
 
         // 设置广播地址
         ipCalculator.setBroadcast(iPNetworkSection + hostNumber1);
@@ -78,6 +69,7 @@ public class IPAddressCalculator {
         ipCalculator.setFinallyAvailable(MyUtils.obtainIPBasedOnBinary(ipCalculator.getFinallyAvailable()));
         ipCalculator.setBroadcast(MyUtils.obtainIPBasedOnBinary(ipCalculator.getBroadcast()));
 
+        ipCalculator.setArea(ipInformation.getArea());
         // 返回IPCalculator对象
         return ipCalculator;
     }

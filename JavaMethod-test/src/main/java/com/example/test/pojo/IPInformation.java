@@ -1,11 +1,9 @@
 package com.example.test.pojo;
 
 public class IPInformation {
-
     private String ip;
     /*掩码*/
     private String mask;
-
     private String area;
 
     public String getIp() {
