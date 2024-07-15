@@ -9,12 +9,6 @@ import com.example.util.MyUtils;
  * 自己根据ip格式编写的 与 GPT查询结果一样 都不能 /31 和 /32*/
 public class IPAddressCalculator {
 
-    public static void main(String[] args) {
-        String cidr = "192.168.1.0/30";
-        IPCalculator calculator = Calculator(cidr);
-
-        System.out.println(calculator.toString());
-    }
 
     /**
      * 返回一个计算给定IP和CIDR信息的IPCalculator对象

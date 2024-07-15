@@ -248,16 +248,30 @@ public class MyUtils {
     /* ============================== 实体类 结束 ==============================*/
     /* ============================== 字符串、文章 开始 ==============================*/
 
+    /**
+     * 将给定字符串按照指定的次数进行拼接
+     *
+     * @param str 要拼接的字符串
+     * @param number 拼接的次数
+     * @return 拼接后的字符串
+     *
+     * @note 如果拼接次数为0，则返回空字符串
+     */
     public static String splicingStringsWithTheSameCharacter(String str, int number) {
+        // 如果拼接次数为0，则返回空字符串
         if (number == 0){
             return "";
         }
         String returnStr = "";
+        // 循环拼接字符串
         for (int i = 0 ;i < number ;i++){
+            // 将要拼接的字符串添加到返回字符串中
             returnStr += str;
         }
+        // 返回拼接后的字符串
         return returnStr;
     }
+
 
     /**
      * 使用Java 8 Stream API计算字符在字符串中出现的次数
@@ -726,29 +740,68 @@ public class MyUtils {
         return ip_CIDR;
     }
 
+    /**
+     * 根据二进制字符串获取IP地址
+     *
+     * @param binarySystem 二进制字符串
+     * @return 返回对应的IP地址
+     */
     public static String obtainIPBasedOnBinary(String binarySystem) {
+        // 将二进制字符串按每8位插入"."分隔符，得到IP地址的二进制表示
         String ipBinarySystem = stringInsertionInterval(binarySystem, ".", 8);
+
+        // 使用"."作为分隔符将ipBinarySystem拆分为一个字符串数组
         String[] ipBinarySystemSplit = ipBinarySystem.split("\\.");
+
+        // 初始化IP地址字符串为空
         String ip ="";
+
+        // 遍历字符串数组中的每个元素
         for (String value:ipBinarySystemSplit){
+            // 将每个二进制数转换为十进制数，并添加到IP地址字符串中，同时在末尾添加"."
             ip += Integer.parseInt(value,2) + ".";
         }
+
+        // 去除IP地址字符串末尾的"."
         return ip.substring(0,ip.length()-1);
     }
 
+
+    /**
+     * 在给定字符串的每个固定间隔插入分隔符
+     *
+     * @param information 需要插入分隔符的字符串
+     * @param delimiter   分隔符
+     * @param number      每个分隔符之间的字符数
+     * @return            插入分隔符后的字符串
+     *
+     * @throws IllegalArgumentException 如果分隔符为空或者number小于1，将抛出此异常
+     */
     public static String stringInsertionInterval(String information,String delimiter,int number) {
         String returnStr = "";
+
+        // 当字符串长度大于等于指定的字符数时，循环处理
         while (information.length() >= number){
+            // 截取前number个字符，并加上分隔符，然后追加到返回字符串中
             returnStr += information.substring(0,number) + delimiter;
+
+            // 更新剩余的字符串
             information = information.substring(number,information.length());
         }
+
+        // 如果剩余的字符串为空，并且返回字符串以分隔符结尾，则去掉最后一个分隔符
         if (information.length() == 0 && returnStr.endsWith(delimiter)){
             returnStr = returnStr.substring(0,returnStr.length()-delimiter.length());
+
+        // 如果剩余的字符串不为空，则将其追加到返回字符串中
         }else if (information.length() != 0){
             returnStr = returnStr + information;
         }
+
+        // 返回处理后的字符串
         return returnStr;
     }
+
 
     /* 二进制字符串与逻辑 */
     public static String binaryStringsAndLogic(String ip,String mask) {
