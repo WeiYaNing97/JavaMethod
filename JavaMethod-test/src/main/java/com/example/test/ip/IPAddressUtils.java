@@ -1,20 +1,20 @@
 package com.example.test.ip;
-import com.example.test.pojo.IPCalculator;
-import com.example.test.pojo.IPInformation;
-import com.example.test.pojo.IPInterval;
-import com.example.test.pojo.IpComparator;
+import com.example.test.pojo.*;
 import com.example.util.MyUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 public class IPAddressUtils {
 
 
+    /**
+     * 从给定的返回信息中提取IP信息，并返回IP信息列表
+     *
+     * @param returnInformation 包含IP信息的字符串
+     * @return 包含提取出的IP信息的列表
+     */
     public static List<IPInformation> getIPInformation(String returnInformation) {
         List<IPInformation> ipInformationList = new ArrayList<>();
         // 按照换行符将返回信息分割成数组
@@ -69,133 +69,231 @@ public class IPAddressUtils {
         }
         return ipInformationList;
     }
-
-
-    /*实体类根据IP排序*/
+    /**
+     * 根据IP地址对IPCalculator实体类列表进行排序
+     *
+     * @param ipCalculatorList IPCalculator实体类列表
+     * @return 排序后的IPCalculator实体类列表
+     */
     public static List<IPCalculator> sortIPCalculator(List<IPCalculator> ipCalculatorList) {
+        // 使用IpComparator对ipCalculatorList进行排序
         ipCalculatorList.sort(new IpComparator());
+        // 返回排序后的ipCalculatorList
         return ipCalculatorList;
     }
 
-    public static List<List<IPCalculator>> groupIPCalculator(List<IPCalculator> ipCalculatorList) {
-        List<List<IPCalculator>> returnList = new ArrayList<>();
-
-        while ( ipCalculatorList.size() > 0) {
-
-            List<IPCalculator> ipCalculators = new ArrayList<>();
-
-            ipCalculators.add(ipCalculatorList.get(0));
-
-            for (int i = 1; i < ipCalculatorList.size(); i++) {
-                boolean isBreak = false;
-                if (ipCalculatorList.get(i-1).getIp().equals(ipCalculatorList.get(i).getIp())) {
-                    ipCalculators.add(ipCalculatorList.get(i));
-                    continue;
-                }else if (isIPInRange(ipCalculatorList.get(i).getIp(), ipCalculatorList.get(i-1).getFirstAvailable(), ipCalculatorList.get(i-1).getFinallyAvailable())){
-                    ipCalculators.add(ipCalculatorList.get(i));
-                    continue;
-                }
-
-
-                String[] previousIpSplit = ipCalculatorList.get(i-1).getIp().split("\\.");
-                String[] currentIpSplit = ipCalculatorList.get(i).getIp().split("\\.");
-                for (int j = 0; j < 3; j++) {
-                    /* 相等则比较下一元素*/
-                    if (previousIpSplit[j].equals(currentIpSplit[j])){
-                        continue;
-                        /* 前一IP比下一IP 的对应元素小一*/
-                    }else if (Integer.valueOf(previousIpSplit[j]).intValue() - Integer.valueOf(currentIpSplit[j]) == -1){
-                        ipCalculators.add(ipCalculatorList.get(i));
-                        break;
-                    }else {
-                        isBreak = true;
-                        break;
-                    }
-                }
-
-                if (isBreak){
-                    break;
-                }
-            }
-
-            // 使用Lambda表达式和Comparator进行排序
-            ipCalculators.sort(Comparator.comparing(IPCalculator::getMask));
-
-            returnList.add(ipCalculators);
-            for (IPCalculator pojo:ipCalculators){
-                ipCalculatorList.remove(pojo);
-            }
-        }
-
-        return returnList;
-
-    }
-
+    /**
+     * 判断一个IP地址是否在指定的IP地址范围内
+     *
+     * @param ipToCheck 要检查的IP地址
+     * @param startIP 起始IP地址
+     * @param endIP 结束IP地址
+     * @return 如果要检查的IP地址在指定的范围内，则返回true；否则返回false
+     */
     public static boolean isIPInRange(String ipToCheck, String startIP, String endIP) {
+        // 将起始IP地址转换为长整型
         long start = ipToLong(startIP);
+        // 将结束IP地址转换为长整型
         long end = ipToLong(endIP);
+        // 将要检查的IP地址转换为长整型
         long check = ipToLong(ipToCheck);
 
+        // 判断要检查的IP地址是否在指定范围内
         return check >= start && check <= end;
     }
-
+    /**
+     * 将IP地址字符串转换为长整型
+     *
+     * @param ipAddress IP地址字符串
+     * @return 转换后的长整型值
+     * @throws IllegalArgumentException 如果输入的IP地址字符串无效
+     */
     private static long ipToLong(String ipAddress) {
         try {
+            // 通过InetAddress类的getByName方法将IP地址字符串转换为InetAddress对象，并获取其字节数组
             byte[] bytes = InetAddress.getByName(ipAddress).getAddress();
             long result = 0;
+            // 遍历字节数组，将每个字节转换为长整型并拼接起来
             for (byte b : bytes) {
+                // 将result左移8位，相当于将result乘以2的8次方
                 result <<= 8;
+                // 将当前字节b与0xFF进行位与运算，确保只保留低8位，然后与result进行位或运算，将结果保存到result中
                 result |= (b & 0xFF);
             }
+            // 返回转换后的长整型值
             return result;
         } catch (UnknownHostException e) {
+            // 如果输入的IP地址字符串无效，则抛出IllegalArgumentException异常，并携带UnknownHostException异常作为原因
             throw new IllegalArgumentException("Invalid IP address", e);
         }
     }
 
+    /**
+     * 将长整型表示的IP地址转换为点分十进制格式的字符串
+     *
+     * @param ipAsLong 长整型表示的IP地址
+     * @return 点分十进制格式的IP地址字符串
+     * @throws RuntimeException 如果IP地址转换过程中发生错误
+     */
+    public static String longToIp(long ipAsLong) {
+        byte[] bytes = new byte[4];
+        for (int i = 0; i < 4; ++i) {
+            int offset = (3 - i) * 8;
+            bytes[i] = (byte) ((ipAsLong >> offset) & 0xFF);
+        }
+        try {
+            return InetAddress.getByAddress(bytes).getHostAddress();
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    public static List<List<IPCalculator>> getAggregation(List<IPCalculator> ipCalculatorList) {
-        List<List<IPCalculator>> returnList = new ArrayList<>();
-        while (ipCalculatorList.size() > 0) {
+    public static List<IPAddresses> splicingAddressRange(List<IPCalculator> ipCalculatorList) {
+        List<IPAddresses> ipAddressesList = new ArrayList<>();
+        for (IPCalculator ipCalculator : ipCalculatorList) {
+            IPAddresses ipAddresses = new IPAddresses();
+            ipAddresses.setIpStart(ipCalculator.getFirstAvailable());
+            ipAddresses.setIpEnd(ipCalculator.getFinallyAvailable());
             List<IPCalculator> ipCalculators = new ArrayList<>();
-            ipCalculators.add(ipCalculatorList.get(0));
+            ipCalculators.add(ipCalculator);
+            ipAddresses.setIpCalculatorList(ipCalculators);
+            ipAddressesList.add(ipAddresses);
+        }
+        boolean flag = true;
+        while (flag){
+            flag = false;
+            for (int i = ipAddressesList.size()-1; i >= 1; i--){
+                if (isIPInRange(ipAddressesList.get(i-1).getIpStart(),
+                        ipAddressesList.get(i).getIpStart(), ipAddressesList.get(i).getIpEnd())
+                || isIPInRange(ipAddressesList.get(i).getIpStart(),
+                        ipAddressesList.get(i-1).getIpStart(), ipAddressesList.get(i-1).getIpEnd())
+                || determineIPContinuity(ipAddressesList.get(i-1).getIpEnd(), ipAddressesList.get(i).getIpStart())
+                || determineIPContinuity(ipAddressesList.get(i).getIpEnd(), ipAddressesList.get(i-1).getIpStart())) {
+                    flag = true;
 
-            IPInterval ipInterval = new IPInterval(ipCalculatorList.get(0).getFirstAvailable(), ipCalculatorList.get(0).getFinallyAvailable());
-            for (int i = 1; i < ipCalculatorList.size(); i++) {
-                IPCalculator ipCalculator = ipCalculatorList.get(i);
-                IPInterval forIpInterval = new IPInterval(ipCalculator.getFirstAvailable(), ipCalculator.getFinallyAvailable());
-                if (contain(ipInterval,forIpInterval)) {
-                    ipCalculators.add(ipCalculator);
+                    List<String> ipAddresses = new ArrayList<>();
+                    ipAddresses.add(ipAddressesList.get(i).getIpStart());
+                    ipAddresses.add(ipAddressesList.get(i).getIpEnd());
+                    ipAddresses.add(ipAddressesList.get(i-1).getIpStart());
+                    ipAddresses.add(ipAddressesList.get(i-1).getIpEnd());
+
+                    String minIp = getMinIP(ipAddresses);
+                    String maxIp = getMaxIP(ipAddresses);
+
+                    IPAddresses pojo = new IPAddresses();
+                    pojo.setIpStart(minIp);
+                    pojo.setIpEnd(maxIp);
+                    List<IPCalculator> ipCalculators = new ArrayList<>();
+                    ipCalculators.addAll(ipAddressesList.get(i).getIpCalculatorList());
+                    ipCalculators.addAll(ipAddressesList.get(i-1).getIpCalculatorList());
+                    pojo.setIpCalculatorList(ipCalculators);
+
+                    ipAddressesList.remove(ipAddressesList.get(i));
+                    ipAddressesList.remove(ipAddressesList.get(i-1));
+                    ipAddressesList.add(pojo);
                 }
             }
-            returnList.add(ipCalculators);
-            for (IPCalculator pojo:ipCalculators){
-                ipCalculatorList.remove(pojo);
-            }
         }
-        return returnList;
+
+        return ipAddressesList;
     }
 
+    public static boolean determineIPContinuity(String ip1, String ip2) {
+        long l1 = ipToLong(ip1);
+        long l2 = ipToLong(ip2);
+        return Math.abs(l1 - l2) == 1l;
+    }
 
-    public static boolean contain(IPInterval Interval1,IPInterval Interval2) {
-        String ip1Start = Interval1.getIpStart();
-        String ip1End = Interval1.getIpEnd();
-        String ip2Start = Interval2.getIpStart();
-        String ip2End = Interval2.getIpEnd();
+    /**
+     * 从给定的IP地址列表中获取最大的IP地址。
+     *
+     * @param ipAddresses 包含IP地址的字符串列表
+     * @return 列表中的最大IP地址，如果不存在则返回null
+     * @throws NullPointerException 如果传入的ipAddresses参数为null
+     * @throws ClassCastException   如果ipAddresses列表中的某个元素无法转换为长整型表示的IP地址
+     */
+    public static String getMaxIP(List<String> ipAddresses) {
+        return Collections.max(ipAddresses, Comparator.comparing(IPAddressUtils::toLong));
+    }
 
-        long start1 = ipToLong(ip1Start);
-        long end1 = ipToLong(ip1End);
-        long start2 = ipToLong(ip2Start);
-        long end2 = ipToLong(ip2End);
+    /**
+     * 从给定的IP地址列表中获取最小的IP地址。
+     *
+     * @param ipAddresses 包含IP地址的字符串列表
+     * @return 列表中最小的IP地址，如果不存在则返回null
+     */
+    public static String getMinIP(List<String> ipAddresses) {
+        return Collections.min(ipAddresses, Comparator.comparing(IPAddressUtils::toLong));
+    }
 
-        if (isContained(start2, end2, start1, end1)) {
-            return true;
+    public static long toLong(String ipAddress) {
+        String[] parts = ipAddress.split("\\.");
+        long result = 0;
+        for (int i = 0; i < parts.length; i++) {
+            result |= Long.parseLong(parts[i]) << (24 - (8 * i));
         }
-        return false;
+        return result;
     }
 
-    private static boolean isContained(long start1, long end1, long start2, long end2) {
-        return start1 >= start2 && end1 <= end2;
+    /**
+     * todo 待检测
+     *
+     * 根据IP地址的整数表示形式获取地址子网掩码位数
+     *
+     * @param num IP地址的整数表示形式
+     * @return 返回子网掩码的位数
+     * @throws IllegalArgumentException 如果传入的参数不是有效的IP地址整数表示形式（即小于0或大于255.255.255.255对应的整数）
+     *
+     * 注意：此方法假设IP地址的整数表示形式为无符号整数，并且其值在0到2^32-1之间（包含）。
+     * 若输入的整数num为全1的二进制字符串，则视为一个特殊的IP地址（如广播地址），此时子网掩码位数为32减去num的二进制长度；
+     * 否则，子网掩码位数为32减去num的二进制长度再加1。
+     */
+    public static Integer getTheNumberOfMasks(int num) {
+        // 将整数num转换为二进制字符串
+        String binaryString = Integer.toBinaryString(num);
+
+        // 判断二进制字符串中1的个数是否等于字符串长度
+        if (MyUtils.countOccurrencesWithStream(binaryString, '1') == binaryString.length()){
+            // 如果是全1的二进制字符串，则返回32减去二进制字符串的长度
+            return 32 - binaryString.length();
+        } else {
+            // 否则，返回32减去二进制字符串的长度再加1
+            return 32 - binaryString.length() + 1;
+        }
     }
 
+
+    /**
+     * 计算两个IP地址之间的地址数量（包括起始和结束IP地址）
+     *
+     * @param ip1 起始IP地址，格式为点分十进制字符串
+     * @param ip2 结束IP地址，格式为点分十进制字符串
+     * @return 返回起始和结束IP地址之间的地址数量（包括起始和结束IP地址），类型为Integer
+     * @throws NumberFormatException 如果起始或结束IP地址的格式不正确
+     */
+    public static Integer numberOfAddresses(String ip1, String ip2) {
+        long l1 = ipToLong(ip1);
+        long l2 = ipToLong(ip2);
+        return (int) Math.abs(l2 - l1 + 1);
+    }
+
+    public static List<String> addressSegmentDecomposition(IPAddresses ipAddress) {
+        List<String> ipList = new ArrayList<>();
+        String sign = ipAddress.getIpStart();
+        String ipEnd = ipAddress.getIpEnd();
+        while (!(ipEnd.equals(sign))){
+            Integer ipNumber = numberOfAddresses(sign, ipEnd);
+            String ip = sign + "/" + getTheNumberOfMasks(ipNumber);
+            ipList.add(ip);
+            IPCalculator calculator = IPAddressCalculator.Calculator(ip);
+            /*String finallyAvailable = calculator.getFinallyAvailable();*/
+            sign = calculator.getFinallyAvailable();
+        }
+        return ipList;
+    }
+
+    public static void main(String[] args) {
+        Integer theNumberOfMasks = getTheNumberOfMasks(255);
+        System.out.println(theNumberOfMasks);
+    }
 }

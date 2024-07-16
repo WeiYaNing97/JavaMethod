@@ -11,10 +11,7 @@ public class IPAddressCalculator {
 
 
 
-    public static IPCalculator Calculator(IPInformation ipInformation) {
-
-        String ipCIDR = MyUtils.convertToCIDR(ipInformation.getIp(), ipInformation.getMask());
-
+    public static IPCalculator Calculator(String ipCIDR) {
 
         // 创建IPBlock对象
         IPBlock ipBlock = new IPBlock(ipCIDR);
@@ -69,7 +66,6 @@ public class IPAddressCalculator {
         ipCalculator.setFinallyAvailable(MyUtils.obtainIPBasedOnBinary(ipCalculator.getFinallyAvailable()));
         ipCalculator.setBroadcast(MyUtils.obtainIPBasedOnBinary(ipCalculator.getBroadcast()));
 
-        ipCalculator.setArea(ipInformation.getArea());
         // 返回IPCalculator对象
         return ipCalculator;
     }

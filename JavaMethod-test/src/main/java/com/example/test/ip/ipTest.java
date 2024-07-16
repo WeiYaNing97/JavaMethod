@@ -1,9 +1,11 @@
 package com.example.test.ip;
 
+import com.example.test.pojo.IPAddresses;
 import com.example.test.pojo.IPCalculator;
 import com.example.test.pojo.IPInformation;
 import com.example.test.pojo.IpComparator;
 import com.example.test.returnInformation;
+import com.example.util.MyUtils;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,38 +14,25 @@ import java.util.stream.Collectors;
 public class ipTest {
     public static void main(String[] args) {
         // 获取IP信息列表
-        List<IPInformation> ipInformationList = IPAddressUtils.getIPInformation(returnInformation.RUIJIE);
+        List<IPInformation> ipInformationList = IPAddressUtils.getIPInformation(returnInformation.H3C);
+        List<String> collect = ipInformationList.stream().map(ipInformation -> MyUtils.convertToCIDR(ipInformation.getIp(), ipInformation.getMask())).collect(Collectors.toList());
+
 
         // 将IP信息列表转换为IP计算器列表
-        List<IPCalculator> ipCalculatorList = ipInformationList.stream().map(ipInformation -> IPAddressCalculator.Calculator(ipInformation)).collect(Collectors.toList());
+        List<IPCalculator> ipCalculatorList = collect.stream().map(ipCIDR -> IPAddressCalculator.Calculator(ipCIDR)).collect(Collectors.toList());
 
         // 对IP计算器列表进行排序
         IPAddressUtils.sortIPCalculator(ipCalculatorList);
 
-        // TODO 临近分组
-        List<List<IPCalculator>> lists = IPAddressUtils.groupIPCalculator(ipCalculatorList);
+        List<IPAddresses> ipAddresses = IPAddressUtils.splicingAddressRange(ipCalculatorList);
 
-        for (List<IPCalculator> list : lists) {
-            System.out.println("1============ 聚合块 开始===============");
-
-            list.stream().forEach(x -> System.out.println(x.getIp() +"["+ x.getFirstAvailable() +","+ x.getFinallyAvailable()+"]" ));
-
-            System.out.println("2============ 聚合块 为===============");
-
-            List<List<IPCalculator>> aggregation = IPAddressUtils.getAggregation(list);
-
-            for (List<IPCalculator> ipCalculators : aggregation) {
-                System.out.println("\r");
-
-                for (IPCalculator ipCalculator : ipCalculators) {
-                    System.out.print(ipCalculator.getIp() +"["+ ipCalculator.getFirstAvailable() +","+ ipCalculator.getFinallyAvailable()+"]" );
-
-                }
-                System.out.println("\r");
-
-            }
-
-            System.out.println("3============ 聚合块 结束===============\r\n\r\n");
+        for (IPAddresses ipAddress : ipAddresses) {
+            System.out.println("原始IP:");
+            ipAddress.getIpCalculatorList().stream().forEach(x -> System.out.println(x.getIp() + "/" + x.getMask() + "[" + x.getFirstAvailable() + " - " + x.getFinallyAvailable() + "]"));
+            System.out.println("聚合为:");
+            List<String> stringList = IPAddressUtils.addressSegmentDecomposition(ipAddress);
+            stringList.stream().forEach(System.out::println);
+            System.out.println("==============================================================");
         }
 
     }
