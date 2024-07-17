@@ -252,14 +252,7 @@ public class IPAddressUtils {
         // 将整数num转换为二进制字符串
         String binaryString = Integer.toBinaryString(num);
 
-        // 判断二进制字符串中1的个数是否等于字符串长度
-        if (MyUtils.countOccurrencesWithStream(binaryString, '1') == binaryString.length()){
-            // 如果是全1的二进制字符串，则返回32减去二进制字符串的长度
-            return 32 - binaryString.length();
-        } else {
-            // 否则，返回32减去二进制字符串的长度再加1
-            return 32 - binaryString.length() + 1;
-        }
+        return 32 - binaryString.length() + 1;
     }
 
 
@@ -281,19 +274,43 @@ public class IPAddressUtils {
         List<String> ipList = new ArrayList<>();
         String sign = ipAddress.getIpStart();
         String ipEnd = ipAddress.getIpEnd();
-        while (!(ipEnd.equals(sign))){
+        while (ipToLong(sign) <= ipToLong(ipEnd)){
+
+            if (ipToLong(sign) == ipToLong(ipEnd)){
+                ipList.add(sign + "/32");
+
+                IPCalculator calculator = IPAddressCalculator.Calculator(sign + "/32");
+                System.out.println(sign + "/32"+"范围是: ["+calculator.getFirstAvailable()+","+calculator.getFinallyAvailable()+"]");
+
+                break;
+            }
+
             Integer ipNumber = numberOfAddresses(sign, ipEnd);
             String ip = sign + "/" + getTheNumberOfMasks(ipNumber);
-            ipList.add(ip);
             IPCalculator calculator = IPAddressCalculator.Calculator(ip);
+
+            System.out.println(ip+"范围是: ["+calculator.getFirstAvailable()+","+calculator.getFinallyAvailable()+"]");
+
+            ipList.add(ip);
+
             /*String finallyAvailable = calculator.getFinallyAvailable();*/
-            sign = calculator.getFinallyAvailable();
+            sign = longToIp(ipToLong(calculator.getFinallyAvailable()) + 1);
         }
         return ipList;
     }
 
-    public static void main(String[] args) {
+
+    public static void main1(String[] args) {
         Integer theNumberOfMasks = getTheNumberOfMasks(255);
         System.out.println(theNumberOfMasks);
     }
+
+    public static void main(String[] args) {
+        IPAddresses ipAddress =new IPAddresses();
+        ipAddress.setIpStart("192.168.1.128");
+        ipAddress.setIpEnd("192.168.2.255");
+        List<String> stringList = addressSegmentDecomposition(ipAddress);
+        System.out.println(stringList);
+    }
+
 }

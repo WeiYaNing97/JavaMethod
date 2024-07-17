@@ -38,4 +38,9 @@ public class returnInformation {
             "  network 10.98.138.0 0.0.0.255\n" +
             "  network 10.98.139.0 0.0.0.255";*/
 
+    /*public static String H3C =
+            "network 10.122.114.84 0.0.0.3 area 0.0.0.0\n" +
+            "network 10.122.114.88 0.0.0.3 area 0.0.0.0\n"+
+            "network 10.122.114.84 0.0.0.3 area 0.0.0.0\n" +
+            "network 10.122.114.80 0.0.0.3 area 0.0.0.0";*/
 }

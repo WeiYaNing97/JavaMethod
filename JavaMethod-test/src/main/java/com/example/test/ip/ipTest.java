@@ -27,12 +27,18 @@ public class ipTest {
         List<IPAddresses> ipAddresses = IPAddressUtils.splicingAddressRange(ipCalculatorList);
 
         for (IPAddresses ipAddress : ipAddresses) {
-            System.out.println("原始IP:");
-            ipAddress.getIpCalculatorList().stream().forEach(x -> System.out.println(x.getIp() + "/" + x.getMask() + "[" + x.getFirstAvailable() + " - " + x.getFinallyAvailable() + "]"));
-            System.out.println("聚合为:");
+            System.err.println("原始IP:");
+            ipAddress.getIpCalculatorList().stream().forEach(x -> System.err.println(x.getIp() + "/" + x.getMask() + "[" + x.getFirstAvailable() + " - " + x.getFinallyAvailable() + "]"));
+            System.err.println("聚合为:");
             List<String> stringList = IPAddressUtils.addressSegmentDecomposition(ipAddress);
-            stringList.stream().forEach(System.out::println);
-            System.out.println("==============================================================");
+            stringList.stream().forEach(System.err::println);
+            System.err.println("==============================================================");
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
