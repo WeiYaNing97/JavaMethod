@@ -67,3 +67,46 @@
         username: guest
         password: guest
         
+# 多数据源 dynamic-datasource
+## 依赖
+        <!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+## 配置
+    spring:
+        application:
+            name: JavaMethod
+        datasource:
+            dynamic:
+                primary: master
+                strict: false
+                datasource:
+                    master:
+                        url: jdbc:mysql://localhost:3306/javamethod?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+                        username: root
+                        password: root
+                        driver-class-name: com.mysql.cj.jdbc.Driver
+                    slave_1:
+                        url: jdbc:mysql://localhost:3306/javamethod1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+                        username: root
+                        password: root
+                        driver-class-name: com.mysql.cj.jdbc.Driver`
+
+## 切换数据源
+    @Service
+    @DS("slave")
+    public class UserServiceImpl implements UserService {
+    
+        @Autowired
+        private JdbcTemplate jdbcTemplate;
+    
+        @Override
+        @DS("slave_1")
+        public List selectByCondition() {
+        return jdbcTemplate.queryForList("select * from user where age >10");
+        }
+    }`

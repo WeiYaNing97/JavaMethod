@@ -3,6 +3,7 @@ package com.example.userLogin.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.example.method.login.LoginUser;
 import com.example.userLogin.domain.TUser;
 import com.example.userLogin.service.ITUserService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户登录信息表Controller
@@ -97,4 +99,5 @@ public class TUserController
         // 如果用户密码不匹配，则返回false
         return false;
     }
+
 }
