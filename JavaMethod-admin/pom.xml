@@ -80,11 +80,11 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--实例模块-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.example</groupId>
             <artifactId>JavaMethod-example</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
         <!--测试模块-->
         <dependency>
             <groupId>com.example</groupId>

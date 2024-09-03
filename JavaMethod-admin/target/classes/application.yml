@@ -5,10 +5,16 @@ spring:
   application:
     name: JavaMethod
   datasource:
-    url: jdbc:mysql://localhost:3306/javamethod?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        # 默认数据源
+        master:
+          url: jdbc:mysql://localhost:3306/javamethod?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
     # 引入其他yml配置
     active: druid
@@ -19,11 +25,11 @@ spring:
     # 端口，默认为6379
     port: 6379
   # rabbitmq 配置
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+  #rabbitmq:
+    #host: localhost
+    #port: 5672
+    #username: guest
+    #password: guest
 
 
 # MyBatis配置

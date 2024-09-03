@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.userLogin.mapper.TMySqlTestMapper">
+    
+    <resultMap type="com.example.userLogin.domain.MySqlTest" id="MySqlTestResult">
+        <id property="testId"    column="test_id"    />
+        <result property="testInformation"    column="test_information" />
+    </resultMap>
+
+
+    <insert id="insertMySqlTest" parameterType="com.example.userLogin.domain.MySqlTest">
+        INSERT INTO mysqltest(test_information) VALUES (#{testInformation})
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="MySqlTestResult">
+        SELECT * FROM mysqltest WHERE test_id = #{id}
+    </select>
+    <select id="selectAll" parameterType="com.example.userLogin.domain.MySqlTest" resultMap="MySqlTestResult">
+        SELECT * FROM mysqltest
+    </select>
+
+    <select id="selectByIds" parameterType="com.example.userLogin.domain.MySqlTest" resultMap="MySqlTestResult">
+        SELECT * FROM mysqltest where test_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

@@ -12,6 +12,7 @@ public class ReadFromFile {
     public static List<String> readContent(String url) {
 
         List<String> stringList = new ArrayList<>();
+        String str = "";
         try {
             File file = new File(url);
             FileReader reader = new FileReader(file);
@@ -19,6 +20,7 @@ public class ReadFromFile {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 stringList.add(line);
+                str = str + line +"\r\n";
             }
             bufferedReader.close();
         } catch (IOException e) {
@@ -28,6 +30,16 @@ public class ReadFromFile {
                 e.printStackTrace();
             }
         } finally {
+            String[] split = str.split("\r\n");
+            for (int i = 0; i < split.length-1; i++){
+                if (split[i].trim().equals(stringList.get(i).trim())){
+                    System.out.println(i+" === "+split[i]+" === "+stringList.get(i));
+                }else {
+                    System.err.println("文件内容读取错误");
+                    System.err.println(split[i]+" === "+stringList.get(i));
+                }
+            }
+            System.out.println("文件读取成功");
             return stringList;
         }
     }
