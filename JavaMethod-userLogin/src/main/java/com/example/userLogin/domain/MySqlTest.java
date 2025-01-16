@@ -5,7 +5,7 @@ import java.util.List;
 public class MySqlTest {
     private Integer testId;
 
-    private StringBuffer testInformation;
+    private String testInformation;
 
     public Integer getTestId() {
         return testId;
@@ -15,11 +15,11 @@ public class MySqlTest {
         this.testId = testId;
     }
 
-    public StringBuffer getTestInformation() {
+    public String getTestInformation() {
         return testInformation;
     }
 
-    public void setTestInformation(StringBuffer testInformation) {
+    public void setTestInformation(String testInformation) {
         this.testInformation = testInformation;
     }
 }

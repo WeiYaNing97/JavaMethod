@@ -3,6 +3,7 @@ import com.example.userLogin.domain.MySqlTest;
 import com.example.userLogin.service.IMySqlTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,15 +28,17 @@ public class MySqlTestController {
 
     @Value("${splitKey}")
     private String splitKey;
+
+
     @RequestMapping("/add")
+    @Transactional
     public int add() {
         MySqlTest mySqlTest = new MySqlTest();
-        String s = ReadFileContent("E:\\BaiduNetdiskDownload\\曲终人散皆是梦1.txt");
-        mySqlTest.setTestInformation(new StringBuffer(s));
+        mySqlTest.setTestInformation("123456789012345678901234567890123456789012345678901234567890");
 
         for (int w = 1; w < 11;w++) {
             Instant start = Instant.now();
-            for (int i = 0; i < 5244; i++) {
+            for (int i = 0; i < 10000; i++) {
                 // 获取第一个时间点
                 int j = iMySqlTestService.insertMySqlTest(mySqlTest);
             }
@@ -44,7 +47,7 @@ public class MySqlTestController {
             // 计算时间差
             Duration duration = Duration.between(start, end);
             // 输出结果，格式化为秒和纳秒
-            System.out.printf(w + "次 Time difference: %d.%09d seconds%n",
+            System.out.printf(w + "次插入 Time difference: %d.%09d seconds%n",
                     duration.getSeconds(), duration.getNano());
         }
         return 1;
@@ -52,13 +55,12 @@ public class MySqlTestController {
 
     @RequestMapping("/select")
     public String Select() {
-        int startInt = 21536;
-        for (int  w = 1; w < 11;w++) {
-
+        int startInt = 904221;
+        for (int  w = 1; w < 16;w++) {
             Instant start = Instant.now();
             MySqlTest mySqlTestList1 = new MySqlTest();
             int i = startInt;
-            for (; i < startInt + 5244; i++) {
+            for (; i < startInt + 10000; i++) {
                 // 获取第一个时间点
                 mySqlTestList1 = iMySqlTestService.selectById(i);
             }
@@ -67,7 +69,7 @@ public class MySqlTestController {
             // 计算时间差
             Duration duration = Duration.between(start, end);
             // 输出结果，格式化为秒和纳秒
-            System.out.printf(w+" 次 Time difference: %d.%09d seconds%n",
+            System.out.printf(w+" 次读取 Time difference: %d.%09d seconds%n",
                     duration.getSeconds(), duration.getNano());
             startInt = i;
         }
