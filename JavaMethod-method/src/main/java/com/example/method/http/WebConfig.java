@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 自定义拦截器配置类，用于注册自定义的拦截器。
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

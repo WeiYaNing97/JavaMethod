@@ -1,7 +1,5 @@
 package com.example.userLogin.domain;
 
-import java.util.List;
-
 public class MySqlTest {
     private Integer testId;
 

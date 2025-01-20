@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 读取文件内容，并以字符串列表的形式返回
+ */
 public class ReadFromFile {
 
     public static List<String> readContent(String url) {

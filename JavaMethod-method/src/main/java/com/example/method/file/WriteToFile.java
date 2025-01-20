@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * 写入文件内容，
+ */
 public class WriteToFile {
 
     public static void writeString(String value, String url) {

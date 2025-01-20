@@ -6,6 +6,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Stream 流式编程测试类
+ */
 public class StreamTest {
 
 

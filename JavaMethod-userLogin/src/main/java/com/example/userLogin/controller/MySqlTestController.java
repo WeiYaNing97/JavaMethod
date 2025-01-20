@@ -1,4 +1,5 @@
 package com.example.userLogin.controller;
+
 import com.example.userLogin.domain.MySqlTest;
 import com.example.userLogin.service.IMySqlTestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.Instant;
 import java.time.Duration;
-import java.util.List;
+import java.time.Instant;
 
 /**
  * 用户登录信息表Controller

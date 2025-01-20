@@ -1,12 +1,8 @@
 package com.example.userLogin.service.impl;
 
 import com.example.userLogin.domain.MySqlTest;
-import com.example.userLogin.domain.TUser;
 import com.example.userLogin.mapper.TMySqlTestMapper;
-import com.example.userLogin.mapper.TUserMapper;
 import com.example.userLogin.service.IMySqlTestService;
-import com.example.userLogin.service.ITUserService;
-import com.example.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

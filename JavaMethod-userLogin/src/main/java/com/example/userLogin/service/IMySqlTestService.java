@@ -2,7 +2,6 @@ package com.example.userLogin.service;
 
 
 import com.example.userLogin.domain.MySqlTest;
-import com.example.userLogin.domain.TUser;
 
 import java.util.List;
 

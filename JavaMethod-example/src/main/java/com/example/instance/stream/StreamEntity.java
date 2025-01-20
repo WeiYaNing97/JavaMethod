@@ -2,6 +2,9 @@ package com.example.instance.stream;
 
 import lombok.Data;
 
+/**
+ * Stream实体类
+ */
 @Data
 public class StreamEntity {
     /** 主键ID */

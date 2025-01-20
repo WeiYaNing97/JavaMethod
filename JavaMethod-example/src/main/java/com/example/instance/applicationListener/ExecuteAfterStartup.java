@@ -8,10 +8,13 @@ import org.springframework.stereotype.Component;
 
 
 /**
+ * 启动后立即执行类 (一)。
+ * <p>该方法会在项目启动后立即执行，可以用于执行一些需要在应用程序启动后立即执行的初始化操作。
+ *
+ *
  * "@Component 注解是 Spring 中用来声明一个类为 Bean 的基础注解.
  * 它让 Spring 容器能够识别、管理并自动装配这些类的实例。
  * 通过合理使用 @Component 及其相关注解，可以极大地简化应用程序的配置，促进代码的模块化和松耦合。
- *
  */
 @Component
 @Order(1)

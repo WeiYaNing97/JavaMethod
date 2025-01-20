@@ -13,8 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * 在Spring AOP（面向切面编程）中，一个切面类通常包含多个通知（Advice），这些通知定义了切面的行为。
+ * 面向切面编程示例
  *
+ * 在Spring AOP（面向切面编程）中，一个切面类通常包含多个通知（Advice），这些通知定义了切面的行为。
  *
  * 在这个例子中，LoggingAspect类是一个切面类，它包含了五个通知：
  *
@@ -24,15 +25,12 @@ import org.springframework.stereotype.Component;
  * @After：最终通知。无论目标方法是否成功执行或抛出异常，都会在最后运行。可以用来释放资源、记录日志等。
  * @Around：环绕通知。在目标方法执行前后都运行。可以用来记录日志、性能监控、事务管理等。
  *
- *
  * 每个通知都有一个切入点表达式，用于指定该通知应该应用到哪些方法上。
  * 例如，execution(* com.example..*.*(..))
  * 表示该通知将应用于com.example 包下的所有类的所有方法。
  *
- *
  * 配置AOP 在Spring Boot项目中，AOP默认是开启的，无需额外配置。
  * 如果需要自定义AOP配置，可以在application.properties或application.yml文件中进行配置。
- *
  */
 @Aspect
 @Component

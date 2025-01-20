@@ -3,7 +3,6 @@ package com.example.userLogin.mapper;
 
 import com.example.userLogin.domain.TUser;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
