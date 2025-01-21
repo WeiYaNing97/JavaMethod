@@ -60,6 +60,12 @@
             <version>5.3.10</version>
         </dependency>
 
+        <!--实例模块-->
+        <!--<dependency>
+            <groupId>com.example</groupId>
+            <artifactId>JavaMethod-example</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>-->
 
         <!-- 方法类 -->
         <dependency>
@@ -79,12 +85,7 @@
             <artifactId>JavaMethod-userLogin</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!--实例模块-->
-        <!--<dependency>
-            <groupId>com.example</groupId>
-            <artifactId>JavaMethod-example</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
+
         <!--测试模块-->
         <dependency>
             <groupId>com.example</groupId>
@@ -93,5 +94,22 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

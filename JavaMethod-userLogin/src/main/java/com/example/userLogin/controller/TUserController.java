@@ -3,7 +3,7 @@ package com.example.userLogin.controller;
 import com.example.method.login.LoginUser;
 import com.example.userLogin.domain.TUser;
 import com.example.userLogin.service.ITUserService;
-import com.example.util.EncryptionAlgorithm;
+import com.example.utils.util.EncryptionAlgorithm;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

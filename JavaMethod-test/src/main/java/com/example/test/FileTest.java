@@ -1,6 +1,6 @@
 package com.example.test;
 
-import com.example.util.VerifyCodeUtils;
+import com.example.utils.util.VerifyCodeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -3,7 +3,7 @@ package com.example.userLogin.service.impl;
 import com.example.userLogin.domain.TUser;
 import com.example.userLogin.mapper.TUserMapper;
 import com.example.userLogin.service.ITUserService;
-import com.example.uuid.IdUtils;
+import com.example.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

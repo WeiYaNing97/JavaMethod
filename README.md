@@ -6,7 +6,25 @@
     1:New Project 选择 Maven
     2:启动模块 和 子模块名称 注意 "-" 问题
     3:父模块 不依赖 admin，admin 依赖 所有子模块
-    *4:所有类和方法都应该在启动类相同的包或者子包下。
+    4:所有类和方法都应该在启动类相同的包或者子包下。
+
+    5:启动类上添加 @SpringBootApplication，主模块的 pom.xml 添加插件配置：
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 # 二：Springboot 整合 MyBatis 
