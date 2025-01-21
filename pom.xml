@@ -11,6 +11,7 @@
         <module>JavaMethod-userLogin</module>
         <module>JavaMethod-example</module>
         <module>JavaMethod-test</module>
+        <module>JavaMethod-needstart</module>
     </modules>
 
     <parent>

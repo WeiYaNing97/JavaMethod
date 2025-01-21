@@ -1,9 +1,9 @@
-package com.example.instance.rabbitmq;
+package com.example.needstart.rabbitmq;
 
-import com.example.instance.rabbitmq.pubsub.PUBSUBProducer;
-import com.example.instance.rabbitmq.routing.RoutingProducer;
-import com.example.instance.rabbitmq.topic.TopicProducer;
-import com.example.instance.rabbitmq.work.WorkProducer;
+import com.example.needstart.rabbitmq.pubsub.PUBSUBProducer;
+import com.example.needstart.rabbitmq.routing.RoutingProducer;
+import com.example.needstart.rabbitmq.topic.TopicProducer;
+import com.example.needstart.rabbitmq.work.WorkProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

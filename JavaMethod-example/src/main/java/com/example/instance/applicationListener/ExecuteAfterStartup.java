@@ -25,7 +25,6 @@ public class ExecuteAfterStartup implements ApplicationListener<ApplicationReady
      * 注解：@Value("${一级属性名.二级属性名.三级属性名}"),直接将注解应用到需要该参数的类的对象上.
      * 也可以使用单独的配置类，但是需要特定方法。*/
     @Value("${obtain.ymlfile.values}")
-
     private String obtainymlfilevalues;
 
     /**
@@ -38,11 +37,10 @@ public class ExecuteAfterStartup implements ApplicationListener<ApplicationReady
      */
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-
-        System.err.println("第一个项目启动后立即执行类");
-
+        System.err.println("=============================================");
+        System.err.println("第1个项目启动后立即执行类（获取.yml配置文件数据示例）");
         System.err.println(obtainymlfilevalues);
-
+        System.err.println("=============================================");
     }
 
 }

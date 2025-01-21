@@ -61,11 +61,11 @@
         </dependency>
 
         <!--实例模块-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.example</groupId>
             <artifactId>JavaMethod-example</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
 
         <!-- 方法类 -->
         <dependency>
@@ -92,6 +92,13 @@
             <artifactId>JavaMethod-test</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!-- 需要启动中间件的模块-->
+        <!--<dependency>
+            <groupId>com.example</groupId>
+            <artifactId>JavaMethod-needstart</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>-->
 
     </dependencies>
 

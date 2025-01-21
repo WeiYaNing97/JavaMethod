@@ -8,8 +8,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Timer;
 
+/**
+ * 定时任务类，用于在应用程序启动后执行定时任务。
+ * time属性在application.yml文件中配置。 time分钟执行一次。
+ */
 @Component
-@Order(2)
+@Order(2)//权重值，越小越先执行，默认为Integer.MAX_VALUE
 public class JobTimer implements ApplicationListener<ApplicationReadyEvent> {
 
     @Value("${obtain.ymlfile.time}")

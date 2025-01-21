@@ -1,4 +1,4 @@
-package com.example.instance.rabbitmq.config;
+package com.example.needstart.rabbitmq.config;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

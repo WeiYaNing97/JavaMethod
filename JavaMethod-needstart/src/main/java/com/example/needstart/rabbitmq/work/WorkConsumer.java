@@ -1,4 +1,4 @@
-package com.example.instance.rabbitmq.work;
+package com.example.needstart.rabbitmq.work;
 
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.Exchange;

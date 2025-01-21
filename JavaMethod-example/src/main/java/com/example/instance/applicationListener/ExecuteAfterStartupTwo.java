@@ -5,6 +5,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+
 
 /**
  * 启动后立即执行类 (一)。
@@ -29,9 +33,26 @@ public class ExecuteAfterStartupTwo implements ApplicationListener<ApplicationRe
      */
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
+        System.err.println("=============================================");
+        // 获取第一个时间点
+        Instant start = Instant.now();
 
-        System.err.println("第二个项目启动后立即执行类");
 
+        System.err.println("第2个项目启动后立即执行类（获取时间差）");
+        try {
+            Thread.sleep(1024);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // 获取第二个时间点
+        Instant end = Instant.now();
+        // 计算时间差
+        Duration duration = Duration.between(start, end);
+        // 输出结果，格式化为秒和纳秒
+        System.err.printf("获取时间差 Time difference: %d.%09d seconds%n",
+                duration.getSeconds(), duration.getNano());
+        System.err.println("=============================================");
     }
 
 }
