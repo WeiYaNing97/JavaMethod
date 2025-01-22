@@ -60,45 +60,45 @@
             <version>5.3.10</version>
         </dependency>
 
+
+
+
         <!--实例模块-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>JavaMethod-example</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
         <!-- 方法类 -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>JavaMethod-method</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
+        <!-- rabbitmq 需要启动rabbitmq服务端-->
+        <!--<dependency>
             <groupId>com.example</groupId>
-            <artifactId>JavaMethod-utils</artifactId>
+            <artifactId>JavaMethod-rabbitmq</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!-- 用户登录模块 -->
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>JavaMethod-userLogin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
+        </dependency>-->
         <!--测试模块-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>JavaMethod-test</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-        <!-- 需要启动中间件的模块-->
-        <!--<dependency>
+        <!-- 用户登录模块 -->
+        <dependency>
             <groupId>com.example</groupId>
-            <artifactId>JavaMethod-needstart</artifactId>
+            <artifactId>JavaMethod-userLogin</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
+        <!-- 方法模块 -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>JavaMethod-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 

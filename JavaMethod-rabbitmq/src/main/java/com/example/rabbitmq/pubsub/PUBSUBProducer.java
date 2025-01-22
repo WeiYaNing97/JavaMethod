@@ -1,4 +1,4 @@
-package com.example.needstart.rabbitmq.pubsub;
+package com.example.rabbitmq.pubsub;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

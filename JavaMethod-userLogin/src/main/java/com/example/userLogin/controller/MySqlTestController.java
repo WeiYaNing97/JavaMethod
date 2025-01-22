@@ -1,6 +1,7 @@
 package com.example.userLogin.controller;
 
 import com.example.userLogin.domain.MySqlTest;
+import com.example.userLogin.domain.TUser;
 import com.example.userLogin.service.IMySqlTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,10 +45,8 @@ public class MySqlTestController {
 
         // 获取第二个时间点
         Instant end = Instant.now();
-
         // 计算时间差
         Duration duration = Duration.between(start, end);
-
         // 输出结果，格式化为秒和纳秒
         System.out.printf("插入 Time difference: %d.%09d seconds%n",
                 duration.getSeconds(), duration.getNano());

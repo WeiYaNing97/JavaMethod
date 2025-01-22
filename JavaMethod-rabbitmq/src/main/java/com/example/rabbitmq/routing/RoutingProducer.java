@@ -1,4 +1,4 @@
-package com.example.needstart.rabbitmq.routing;
+package com.example.rabbitmq.routing;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.needstart.rabbitmq.pubsub;
+package com.example.rabbitmq.pubsub;
 
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
