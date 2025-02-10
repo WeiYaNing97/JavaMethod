@@ -1,4 +1,4 @@
-package com.example.instance.timer;
+package com.example.method.timer;
 
 
 import com.example.method.log.LogUtils;

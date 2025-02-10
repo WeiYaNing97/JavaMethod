@@ -1,7 +1,6 @@
-package com.example.instance.thread;
+package com.example.method.thread.test;
 
 import java.util.Deque;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ThreadWait {

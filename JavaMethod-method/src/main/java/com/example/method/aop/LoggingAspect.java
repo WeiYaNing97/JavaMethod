@@ -1,4 +1,4 @@
-package com.example.instance.aop;
+package com.example.method.aop;
 
 
 import com.example.method.file.WriteToFile;

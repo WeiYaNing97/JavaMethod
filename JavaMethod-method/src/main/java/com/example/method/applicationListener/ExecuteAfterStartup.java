@@ -1,4 +1,4 @@
-package com.example.instance.applicationListener;
+package com.example.method.applicationListener;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

@@ -1,4 +1,4 @@
-package com.example.instance.stream;
+package com.example.method.stream;
 
 import lombok.Data;
 

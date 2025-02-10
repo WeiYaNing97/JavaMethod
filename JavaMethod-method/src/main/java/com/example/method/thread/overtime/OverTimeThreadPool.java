@@ -1,13 +1,17 @@
-package com.example.instance.thread.overtime;
+package com.example.method.thread.overtime;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+
+/**
+ * 线程超时测试
+ */
 public class OverTimeThreadPool {
 
     public static void main(String[] args) {
         List<Integer> timeList = new ArrayList<>();
-        for (int time = 1000 ; time <= 10000 ; time=time+1000){
+        for (int time = 1000; time <= 10000; time = time + 1000) {
             timeList.add(time);
         }
         try {
@@ -28,14 +32,14 @@ public class OverTimeThreadPool {
         CountDownLatch countDownLatch = new CountDownLatch(timeList.size());
 
         int i = 1;
-        for (Integer time:timeList){
+        for (Integer time : timeList) {
 
             // 创建一个只包含一个线程的新定时任务执行服务
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             // 提交一个定时任务
             ScheduledFuture<?> schedule = scheduledExecutorService.schedule(
                     // 要监控的线程
-                    () ->{
+                    () -> {
                         // 线程休眠指定的时间
                         try {
                             Thread.sleep(time);
@@ -43,7 +47,7 @@ public class OverTimeThreadPool {
                             e.printStackTrace();
                         }
                         // 输出正常结束信息
-                        System.out.println("正常结束："+time);
+                        System.out.println("正常结束：" + time);
                     },
                     // 初始延迟为0秒
                     0,
@@ -57,7 +61,7 @@ public class OverTimeThreadPool {
             } catch (TimeoutException e) {
                 // 超时要执行逻辑
                 // 输出超时信息
-                System.err.println("超时："+time);
+                System.err.println("超时：" + time);
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             } finally {
@@ -70,9 +74,7 @@ public class OverTimeThreadPool {
                 // 关闭定时任务执行服务
                 scheduledExecutorService.shutdown();
             }
-
         }
-
         // 等待所有线程执行完成
         countDownLatch.await();
     }

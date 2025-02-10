@@ -1,5 +1,8 @@
 package com.example.method.enumtest;
 
+/**
+ * 枚举测试类
+ */
 public class MyEnum {
     public static void main(String[] args) {
         direction d = direction.left;

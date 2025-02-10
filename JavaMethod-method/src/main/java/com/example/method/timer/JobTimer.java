@@ -1,4 +1,4 @@
-package com.example.instance.timer;
+package com.example.method.timer;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

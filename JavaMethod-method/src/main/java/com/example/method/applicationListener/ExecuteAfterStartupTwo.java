@@ -1,4 +1,4 @@
-package com.example.instance.applicationListener;
+package com.example.method.applicationListener;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;

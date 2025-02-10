@@ -61,14 +61,6 @@
         </dependency>
 
 
-
-
-        <!--实例模块-->
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>JavaMethod-example</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!-- 方法类 -->
         <dependency>
             <groupId>com.example</groupId>

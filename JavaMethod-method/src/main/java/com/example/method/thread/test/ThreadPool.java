@@ -1,4 +1,4 @@
-package com.example.instance.thread;
+package com.example.method.thread.test;
 
 import java.util.ArrayList;
 import java.util.List;

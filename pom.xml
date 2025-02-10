@@ -9,7 +9,6 @@
         <module>JavaMethod-method</module>
         <module>JavaMethod-utils</module>
         <module>JavaMethod-userLogin</module>
-        <module>JavaMethod-example</module>
         <module>JavaMethod-test</module>
         <module>JavaMethod-rabbitmq</module>
     </modules>

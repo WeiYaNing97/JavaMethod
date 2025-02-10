@@ -1,5 +1,8 @@
-package com.example.instance.thread;
+package com.example.method.thread.test;
 
+/**
+ * ThreadLocal示例
+ */
 public class ThreadLocalExample {
 
     // 创建一个ThreadLocal变量
@@ -22,13 +25,10 @@ public class ThreadLocalExample {
             threadLocalCounter.set(threadLocalCounter.get() + 5);
             System.out.println(Thread.currentThread().getName() + " updated value: " + threadLocalCounter.get());
         };
-
         Thread thread1 = new Thread(task1, "Thread-1");
         Thread thread2 = new Thread(task2, "Thread-2");
-
         thread1.start();
         thread2.start();
-
         thread1.join();
         thread2.join();
     }

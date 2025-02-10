@@ -12,6 +12,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/JavaMethod-example/pom.xml" />
         <option value="$PROJECT_DIR$/JavaMethod-needstart/pom.xml" />
       </set>
     </option>

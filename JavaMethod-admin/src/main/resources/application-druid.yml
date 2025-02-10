@@ -5,3 +5,4 @@ obtain:
     logPath: 'D:\home\JavaMethod\logs\'
 
 splitKey: '&&'
+nThreads: 10

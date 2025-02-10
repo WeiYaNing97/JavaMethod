@@ -1,8 +1,10 @@
 package com.example.userLogin.controller;
 
+import com.example.method.thread.threadpoolapplication.MyThreadPool;
 import com.example.userLogin.domain.MySqlTest;
 import com.example.userLogin.domain.TUser;
 import com.example.userLogin.service.IMySqlTestService;
+import org.apache.tomcat.util.threads.ThreadPoolExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 /**
  * 用户登录信息表Controller
@@ -36,8 +39,7 @@ public class MySqlTestController {
     @Transactional
     public int add() {
         MySqlTest mySqlTest = new MySqlTest();
-        mySqlTest.setTestInformation("123456789012345678901234567890123456789012345678901234567890");
-
+        mySqlTest.setTestInformation("controller测试数据");
         // 获取第一个时间点
         Instant start = Instant.now();
 
