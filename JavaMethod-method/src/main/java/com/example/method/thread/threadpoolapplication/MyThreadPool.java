@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 @Component
-@Order(1)
+@Order(2)
 public class MyThreadPool implements ApplicationListener<ApplicationReadyEvent> {
     public static ExecutorService fixedThreadPool;
     @Value("${nThreads}")
