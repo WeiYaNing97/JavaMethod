@@ -84,6 +84,7 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         // 请求处理完成后的逻辑
+        LogUtils.getInfo("请求处理完成  postHandle= " + handler.toString());
     }
 
     /**
@@ -98,6 +99,7 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 请求完成后的逻辑
+        LogUtils.getInfo("请求处理完成  afterCompletion= " + handler.toString());
     }
 }
 

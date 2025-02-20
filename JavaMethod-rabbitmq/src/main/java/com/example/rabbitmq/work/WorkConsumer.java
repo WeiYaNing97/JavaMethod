@@ -23,9 +23,22 @@ public class WorkConsumer {
     public void receiveMsg(String msg, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws IOException {
         System.out.println("消费者收到消息:"+ msg);
 
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         /*手动签收*/
         /*如果为 false，则只确认当前的 deliveryTag 对应的消息；
         如果为 true，则确认当前 deliveryTag 及之前所有未确认的消息。*/
-        channel.basicAck(deliveryTag,true);
+
+        /*channel.basicAck(deliveryTag,true);*/
+        if (channel.isOpen()) {
+            channel.basicAck(deliveryTag, false);
+        } else {
+            System.out.println("Channel is closed, cannot ack/nack");
+        }
     }
 }
