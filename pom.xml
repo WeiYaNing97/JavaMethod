@@ -11,6 +11,7 @@
         <module>JavaMethod-userLogin</module>
         <module>JavaMethod-test</module>
         <module>JavaMethod-rabbitmq</module>
+        <module>JavaMethod-http</module>
     </modules>
 
     <parent>

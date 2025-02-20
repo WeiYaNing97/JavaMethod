@@ -1,4 +1,4 @@
-package com.example.method.http;
+package com.example.http;
 
 import com.example.method.log.LogUtils;
 import org.springframework.web.servlet.HandlerInterceptor;

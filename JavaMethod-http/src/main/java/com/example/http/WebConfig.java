@@ -1,4 +1,4 @@
-package com.example.method.http;
+package com.example.http;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

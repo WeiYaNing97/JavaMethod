@@ -1,4 +1,4 @@
-package com.example.method.http;
+package com.example.http;
 
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
