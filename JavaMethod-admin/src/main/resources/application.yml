@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9527
 
 spring:
   application:
@@ -11,7 +11,7 @@ spring:
       datasource:
         # 默认数据源
         master:
-          url: jdbc:mysql://localhost:3306/javamethod?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+          url: jdbc:mysql://123.57.51.130:3306/cs?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,15 +21,15 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: localhost
+    host: 123.57.51.130
     # 端口，默认为6379
     port: 6379
   # rabbitmq 配置
-  #rabbitmq:
-    #host: localhost
-    #port: 5672
-    #username: guest
-    #password: guest
+  rabbitmq:
+    host: 123.57.51.130
+    port: 5672
+    username: root
+    password: root
 
 
 # MyBatis配置
