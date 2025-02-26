@@ -20,5 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
         // 将自定义拦截器添加到拦截器注册中心
         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/HttpTest/**");
         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/RabbitMQController/**");
+        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/quartz/**");
     }
 }

@@ -1,0 +1,8 @@
+obtain:
+  ymlfile:
+    values: '使用注解获取yml文件参数值'
+    time: 1
+    logPath: 'D:\home\JavaMethod\logs\'
+
+splitKey: '&&'
+nThreads: 10
