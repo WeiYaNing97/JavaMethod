@@ -107,6 +107,12 @@
             <artifactId>JavaMethod-quartz</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!--elasticsearch-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>JavaMethod-es</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

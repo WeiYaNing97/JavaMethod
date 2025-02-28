@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/JavaMethod-admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JavaMethod-es/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/JavaMethod-http/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/JavaMethod-method/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/JavaMethod-quartz/src/main/java" charset="UTF-8" />
