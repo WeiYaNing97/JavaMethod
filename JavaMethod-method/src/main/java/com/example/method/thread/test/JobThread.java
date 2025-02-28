@@ -24,7 +24,14 @@ public class JobThread extends Thread {
             System.err.println("线程名："+ threadName);
             System.err.println("参数值："+ value);
             System.err.println("countDownLatch值："+ countDownLatch.getCount());
-            countDownLatch.countDown();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        countDownLatch.countDown();
             System.err.println("====== 线程结束 ======");
     }
 }
