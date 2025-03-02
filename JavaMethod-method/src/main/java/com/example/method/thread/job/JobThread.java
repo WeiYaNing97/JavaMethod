@@ -1,4 +1,4 @@
-package com.example.method.thread.test;
+package com.example.method.thread.job;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -19,11 +19,11 @@ public class JobThread extends Thread {
 
     @Override
     public void run() {
-            // 逻辑代码
-            System.err.println("====== 线程开始 ======");
-            System.err.println("线程名："+ threadName);
-            System.err.println("参数值："+ value);
-            System.err.println("countDownLatch值："+ countDownLatch.getCount());
+        // 逻辑代码
+        System.err.println("====== 线程开始 ======");
+        System.err.println("线程名："+ threadName);
+        System.err.println("参数值："+ value);
+        System.err.println("countDownLatch值："+ countDownLatch.getCount());
 
         try {
             Thread.sleep(1000);

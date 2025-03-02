@@ -1,25 +1,43 @@
 package com.example.method.thread.overtime;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * 线程超时测试
+ * 线程超时处理示例
+ *
  */
+@RestController
+@RequestMapping("/overTimeThreadPool")
 public class OverTimeThreadPool {
 
-    public static void main(String[] args) {
+    /**
+     * 处理超时测试
+     *
+     * @RequestMapping("/timeoutTests") 注解用于将HTTP GET请求映射到timeoutTests方法上
+     */
+    @RequestMapping("/timeoutTests")
+    public void timeoutTests() {
+        // 创建一个存储时间的列表
         List<Integer> timeList = new ArrayList<>();
+        // 循环生成时间列表
         for (int time = 1000; time <= 10000; time = time + 1000) {
+            // 将时间添加到列表中
             timeList.add(time);
         }
         try {
+            // 调用切换登录信息的方法
             switchLoginInformations(timeList);
         } catch (InterruptedException e) {
+            // 捕获中断异常并打印堆栈跟踪
             e.printStackTrace();
         }
     }
+
 
     /**
      * 切换登录信息（模拟操作），根据给定的时间列表，创建多个定时任务，并等待它们完成。
@@ -30,10 +48,8 @@ public class OverTimeThreadPool {
     public static void switchLoginInformations(List<Integer> timeList) throws InterruptedException {
         // 计数线程是否执行完成的计数器
         CountDownLatch countDownLatch = new CountDownLatch(timeList.size());
-
         int i = 1;
         for (Integer time : timeList) {
-
             // 创建一个只包含一个线程的新定时任务执行服务
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             // 提交一个定时任务

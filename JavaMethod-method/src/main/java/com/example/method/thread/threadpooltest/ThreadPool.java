@@ -1,4 +1,8 @@
-package com.example.method.thread.test;
+package com.example.method.thread.threadpooltest;
+
+import com.example.method.thread.job.JobThread;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +12,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * 嘉豪 网络设备安全智能巡检系统 使用案例
+ * 由前端传入最大线程数
+ * 每个请求创建一个线程池，为了避免线程提交过多，此处当线程池中的线程数达到 一个 值时，暂缓提交线程
+ */
+@RestController
+@RequestMapping("/threadpool")
 public class ThreadPool {
 
     public static void main(String[] args) {
@@ -41,10 +52,11 @@ public class ThreadPool {
         for (String string:stringList){
 
             // 等待线程池中的线程数小于3时再继续执行
-            while (((ThreadPoolExecutor) fixedThreadPool).getActiveCount() >= 3){
+            while (((ThreadPoolExecutor) fixedThreadPool).getActiveCount() >= 10){// 最大线程数已达到 这个位置的数值应该根据实际情况调整
                 System.out.println("最大线程数已达到，等待线程执行完毕再进行下一次操作");
                 Thread.sleep(500); // 简单等待策略
             }
+
             /*获取线程名*/
             String threadName = getThreadName(i);
             i++;
@@ -59,15 +71,21 @@ public class ThreadPool {
         fixedThreadPool.shutdown();
     }
 
-
-    public static void removeThread(String threadname) {
-        System.err.println("删除线程Thread" + threadname);
-    }
-
+    /**
+     * 根据传入的整数生成一个线程名称
+     *
+     * @param i 传入的整数，用于生成随机数
+     * @return 生成的线程名称，格式为 "threadname" + 当前时间戳 + 随机数
+     */
     /*线程命名*/
     public static String getThreadName(int i) {
-        String name = System.currentTimeMillis() + new Random().nextInt(100) +" ";
+        // 获取当前系统时间戳
+        String name = System.currentTimeMillis() +
+                      // 生成一个0到99之间的随机数
+                      new Random().nextInt(100) +" ";
+        // 返回拼接后的线程名称
         return "threadname" + name;
     }
+
 
 }
