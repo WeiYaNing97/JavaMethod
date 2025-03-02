@@ -15,6 +15,7 @@
         <module>JavaMethod-swagger</module>
         <module>JavaMethod-quartz</module>
         <module>JavaMethod-es</module>
+        <module>JavaMethod-websocket</module>
     </modules>
 
     <parent>
@@ -41,6 +42,8 @@
         <dynamic.datasource.version>3.5.1</dynamic.datasource.version>
         <spring.context.support.version>5.3.10</spring.context.support.version>
         <freemarker.version>2.3.31</freemarker.version>
+        <websocket.version>2.7.12</websocket.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <dependencies>
@@ -179,6 +182,25 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
             <version>2.6.3</version>
+        </dependency>
+
+        <!-- websocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>${websocket.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${websocket.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version> <!-- 请将“最新版本号”替换为实际的版本号，例如：1.2.75 -->
         </dependency>
     </dependencies>
 </project>

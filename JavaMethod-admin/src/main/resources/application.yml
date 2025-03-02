@@ -39,6 +39,15 @@ spring:
     title: 用户接口文档
     description: 用户接口文档
     version: 1.0
+  # 配置thymeleaf模板引擎 websocket配置
+  thymeleaf:
+    mode: HTML
+    cache: true
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    suffix: .html
+    check-template-location: true
+    template-resolver-order: 1
 # MyBatis配置
 mybatis:
   # 搜索指定包别名

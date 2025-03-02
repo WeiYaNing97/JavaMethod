@@ -14,6 +14,7 @@
         <module name="JavaMethod-method" />
         <module name="JavaMethod-quartz" />
         <module name="JavaMethod-http" />
+        <module name="JavaMethod-websocket" />
         <module name="JavaMethod-rabbitmq" />
         <module name="JavaMethod-test" />
       </profile>
@@ -31,6 +32,7 @@
       <module name="JavaMethod-test" options="-parameters" />
       <module name="JavaMethod-userLogin" options="-parameters" />
       <module name="JavaMethod-utils" options="-parameters" />
+      <module name="JavaMethod-websocket" options="-parameters" />
     </option>
   </component>
 </project>

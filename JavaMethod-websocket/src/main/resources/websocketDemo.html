@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>666666</title>
+</head>
+<body>
+传递来的数据值cid:
+<input type="text" th:value="${cid}" id="cid"/>
+<p>【toUserId】：
+<div><input id="toUserId" name="toUserId" type="text" value="user-1"></div>
+<p>【toUserId】：
+<div><input id="contentText" name="contentText" type="text" value="hello websocket"></div>
+<p>【操作】：
+<div>
+    <button type="button" onclick="sendMessage()">发送消息</button>
+</div>
+</body>
+<script type="text/javascript">
+    var socket;
+    window.onload = function() {
+        if (typeof (WebSocket) == "undefined") {
+            console.log("您的浏览器不支持WebSocket");
+        } else {
+            console.log("您的浏览器支持WebSocket");
+
+            // 确保DOM已加载完毕后再获取元素值
+            var cidElement = document.getElementById("cid");
+            if (cidElement) {
+                var cid = cidElement.value;
+                console.log("cid-->" + cid);
+                var reqUrl = "http://localhost:7688/websocket/" + cid;
+                console.log("Attempting to connect to: " + reqUrl.replace("http", "ws"));
+                socket = new WebSocket(reqUrl.replace("http", "ws"));
+
+                // 添加WebSocket事件监听器
+                socket.onopen = function () {
+                    console.log("Socket 已打开");
+                };
+                socket.onmessage = function (msg) {
+                    console.log("onmessage--" + msg.data);
+                };
+                socket.onclose = function () {
+                    console.log("Socket已关闭");
+                };
+                socket.onerror = function () {
+                    console.error("Socket发生了错误");
+                }
+            } else {
+                console.error("未能找到ID为'cid'的元素");
+            }
+        }
+    };
+
+    function sendMessage() {
+        if (!socket || typeof (WebSocket) == "undefined") {
+            console.log("您的浏览器不支持WebSocket或WebSocket未初始化");
+            return;
+        }
+
+        var toUserId = document.getElementById('toUserId').value;
+        var contentText = document.getElementById('contentText').value;
+        var msg = '{"sid":"' + toUserId + '","message":"' + contentText + '"}';
+        console.log(msg);
+
+        if (socket.readyState === WebSocket.OPEN) {
+            socket.send(msg);
+        } else {
+            console.error("WebSocket 连接不可用，当前状态: ", socket.readyState);
+        }
+    }
+</script>
+</html>
