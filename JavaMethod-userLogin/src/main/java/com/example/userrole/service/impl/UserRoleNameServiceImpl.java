@@ -4,7 +4,10 @@ import com.example.userrole.entity.UserRoleName;
 import com.example.userrole.mapper.UserRoleNameMapper;
 import com.example.userrole.service.IUserRoleNameService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRoleNameServiceImpl extends ServiceImpl<UserRoleNameMapper, UserRoleName> implements IUserRoleNameService {
 
+    @Autowired
+    private UserRoleNameMapper userRoleNameMapper;
+
+    @Override
+    public String obtainEmployeeRoles(String userName) {
+        return userRoleNameMapper.obtainEmployeeRoles(userName);
+    }
+
+    @Override
+    public List<String> employeesWhoHaveObtainedRoles(String roleName) {
+        return userRoleNameMapper.employeesWhoHaveObtainedRoles(roleName);
+    }
+
+    @Override
+    public List<UserRoleName> getPojo(UserRoleName userRoleName) {
+        return userRoleNameMapper.getPojo(userRoleName);
+    }
 }

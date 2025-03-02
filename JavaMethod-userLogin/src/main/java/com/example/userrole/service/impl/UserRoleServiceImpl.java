@@ -4,7 +4,10 @@ import com.example.userrole.entity.UserRole;
 import com.example.userrole.mapper.UserRoleMapper;
 import com.example.userrole.service.IUserRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +19,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
+    @Override
+    public List<UserRole> listByRoleIds(List<Integer> roleIds) {
+        return userRoleMapper.listByRoleIds(roleIds);
+    }
 }

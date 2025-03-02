@@ -2,4 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.userrole.mapper.UserRoleNameMapper">
 
+    <select id="obtainEmployeeRoles" resultType="String">
+        SELECT role_name FROM user_role_name WHERE user_name = #{userName}
+    </select>
+
+    <select id="employeesWhoHaveObtainedRoles" resultType="String">
+            SELECT user_name FROM user_role_name WHERE role_name = #{roleName}
+    </select>
+
+    <select id="getPojo" resultType="com.example.userrole.entity.UserRoleName">
+        SELECT * FROM user_role_name
+        <where>
+            <if test="userName != null and userName != ''">
+            AND user_name = #{userName}
+            </if>
+            <if test="roleName != null and roleName != ''">
+            AND role_name = #{roleName}
+            </if>
+        </where>
+    </select>
 </mapper>

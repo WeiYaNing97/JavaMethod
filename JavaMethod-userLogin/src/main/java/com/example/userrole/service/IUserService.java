@@ -2,6 +2,7 @@ package com.example.userrole.service;
 
 import com.example.userrole.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.userrole.entity.UserVO;
 
 /**
  * <p>
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    boolean add(UserVO user);
+
+    boolean deleteById(Integer userId);
 }
