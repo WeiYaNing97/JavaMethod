@@ -17,6 +17,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
 	</settings>
     <typeHandlers>
-        <typeHandler javaType="java.lang.StringBuffer" jdbcType="VARCHAR" handler="com.example.userLogin.controller.StringBufferTypeHandler"/>
+        <typeHandler javaType="java.lang.StringBuffer" jdbcType="VARCHAR" handler="com.example.utils.util.StringBufferTypeHandler"/>
     </typeHandlers>
 </configuration>

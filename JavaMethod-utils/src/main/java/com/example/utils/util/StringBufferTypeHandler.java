@@ -1,4 +1,4 @@
-package com.example.userLogin.controller;
+package com.example.utils.util;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

@@ -11,9 +11,9 @@ spring:
       datasource:
         # 默认数据源
         master:
-          url: jdbc:mysql://123.57.51.130:3306/javamethod?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-          username: javamethod
-          password: root123
+          url: jdbc:mysql://127.0.0.1:3306/javamethod?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+          username: root
+          password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
     # 引入其他yml配置

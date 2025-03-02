@@ -66,11 +66,11 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- rabbitmq 需要启动rabbitmq服务端-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.example</groupId>
             <artifactId>JavaMethod-rabbitmq</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
         <!--测试模块-->
         <dependency>
             <groupId>com.example</groupId>
