@@ -25,12 +25,12 @@ public class MybatisPlusGenerator {
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.example") // 设置父包名
-                            .moduleName("userrole") // 设置父包模块名
+                            .moduleName("studentscores") // 设置父包模块名
                             // .service()  // 设置自定义service路径,不设置就是默认路径
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, System.getProperty("user.dir") +"/src/main/resources/mapper/")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("user_role") // 设置需要生成的表名
+                    builder.addInclude("scores") // 设置需要生成的表名
                             .addTablePrefix("t_", "c_")
                             // 设置自动填充的时间字段
                             .entityBuilder().addTableFills(
