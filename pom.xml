@@ -8,7 +8,7 @@
         <module>JavaMethod-admin</module>
         <module>JavaMethod-method</module>
         <module>JavaMethod-utils</module>
-        <module>JavaMethod-userLogin</module>
+        <module>JavaMethod-user</module>
         <module>JavaMethod-test</module>
         <module>JavaMethod-rabbitmq</module>
         <module>JavaMethod-http</module>
@@ -16,6 +16,7 @@
         <module>JavaMethod-quartz</module>
         <module>JavaMethod-es</module>
         <module>JavaMethod-websocket</module>
+        <module>JavaMethod-security</module>
     </modules>
 
     <parent>
@@ -37,7 +38,7 @@
         <mybatis.plus.boot.version>3.5.1</mybatis.plus.boot.version>
         <commons.lang3.version>3.12.0</commons.lang3.version>
         <hutool.version>5.8.26</hutool.version>
-        <jjwt.version>0.9.1</jjwt.version>
+        <jjwt.version>0.12.6</jjwt.version>
         <swagger.version>2.9.2</swagger.version>
         <dynamic.datasource.version>3.5.1</dynamic.datasource.version>
         <spring.context.support.version>5.3.10</spring.context.support.version>
@@ -138,12 +139,6 @@
         </dependency>
 
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${jjwt.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.context.support.version}</version>
@@ -202,5 +197,37 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version> <!-- 请将“最新版本号”替换为实际的版本号，例如：1.2.75 -->
         </dependency>
+
+
+        <!-- Spring Security Starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+
+
+        <!-- JWT 依赖，用于生成和解析 JSON Web Tokens -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 </project>
