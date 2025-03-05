@@ -24,6 +24,7 @@ spring:
     host: 123.57.51.130
     # 端口，默认为6379
     port: 6379
+    password: root
   # rabbitmq 配置
   rabbitmq:
     host: 123.57.51.130

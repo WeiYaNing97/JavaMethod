@@ -1,14 +1,19 @@
 package com.example.studentscores.controller;
 
 
+import com.example.method.log.LogUtils;
+import com.example.method.redis.RedisService;
 import com.example.studentscores.entity.ClassStudentSUM;
 import com.example.studentscores.entity.ClassSubjectAVG;
 import com.example.studentscores.service.IScoresService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -19,21 +24,40 @@ import java.util.List;
  * @since 2025-03-04
  */
 @RestController
+@Api(tags = "学生成绩")
 @RequestMapping("/studentscores/scores")
 public class ScoresController {
 
     @Autowired
     private IScoresService scoresService;
+    @Autowired
+    RedisService redisService;
 
     @RequestMapping("/sum")
+    @ApiOperation(value = "获取各班各学生总分"  ,notes = "获取各班各学生总分信息")
     public List<ClassStudentSUM> getSumScores() {
-        List<ClassStudentSUM> classStudentSUMList = scoresService.getSumScores();
-        return classStudentSUMList;
+        if (redisService.hasKey("sumScores")) {
+            LogUtils.getInfo("从缓存中获取数据");
+            return redisService.getCacheObject("sumScores");
+        }else {
+            LogUtils.getInfo("从数据库中获取数据");
+            List<ClassStudentSUM> classStudentSUMList = scoresService.getSumScores();
+            redisService.setCacheObject("sumScores", classStudentSUMList, 10, TimeUnit.MINUTES);
+            return classStudentSUMList;
+        }
     }
 
     @RequestMapping("/avg")
+    @ApiOperation(value = "获取各班各科目平均分"  ,notes = "获取各班各科目平均分信息")
     public List<ClassSubjectAVG> getAvgScores() {
-        List<ClassSubjectAVG> classSubjectAVGList = scoresService.getAvgScores();
-        return classSubjectAVGList;
+        if (redisService.hasKey("avgScores")) {
+            LogUtils.getInfo("从缓存中获取数据");
+            return redisService.getCacheObject("avgScores");
+        }else {
+            LogUtils.getInfo("从数据库中获取数据");
+            List<ClassSubjectAVG> classSubjectAVGList = scoresService.getAvgScores();
+            redisService.setCacheObject("avgScores", classSubjectAVGList, 10, TimeUnit.MINUTES);
+            return classSubjectAVGList;
+        }
     }
 }
