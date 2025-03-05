@@ -2,6 +2,8 @@ package com.example.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
  * @author springBoot-Learning
  * @since 2025-03-05
  */
+@Data
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;

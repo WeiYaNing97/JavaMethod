@@ -1,6 +1,8 @@
 package com.example.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
  * @author springBoot-Learning
  * @since 2025-03-05
  */
+@Data
 @TableName("role_permission")
 public class RolePermission implements Serializable {
 

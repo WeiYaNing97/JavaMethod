@@ -1,9 +1,11 @@
 package com.example.user.controller;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,7 +15,8 @@ import org.springframework.stereotype.Controller;
  * @author springBoot-Learning
  * @since 2025-03-05
  */
-@Controller
+@Api(tags = "角色与权限关联表")
+@RestController
 @RequestMapping("/user/role-permission")
 public class RolePermissionController {
 

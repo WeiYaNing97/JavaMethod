@@ -2,6 +2,7 @@ package com.example.user.mapper;
 
 import com.example.user.entity.Users;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author springBoot-Learning
  * @since 2025-03-05
  */
+@Mapper
 public interface UsersMapper extends BaseMapper<Users> {
 
 }
