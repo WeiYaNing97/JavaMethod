@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.user.mapper.UsersMapper">
-
+    <insert id="add" useGeneratedKeys="true" keyProperty="userId">
+        insert into users(
+        <if test="userId!=null">user_id,</if>
+        <if test="email!=null">email,</if>
+        <if test="phoneNumber!=null">phone_number,</if>
+        <if test="firstName!=null">first_name,</if>
+        <if test="lastName!=null">last_name,</if>
+        <if test="dateOfBirth!=null">date_of_birth,</if>
+        <if test="gender!=null">gender,</if>
+        <if test="address!=null">address,</if>
+        <if test="city!=null">city,</if>
+        <if test="postalCode!=null">postal_code,</if>
+        <if test="country!=null">country,</if>
+        <if test="departmentId!=null">department_id,</if>
+        <if test="roleId!=null">role_id,</if>
+        username,
+        password_hash)
+        values (
+        <if test="userId!=null">#{userId},</if>
+        <if test="email!=null">#{email},</if>
+        <if test="phoneNumber!=null">#{phoneNumber},</if>
+        <if test="firstName!=null">#{firstName},</if>
+        <if test="lastName!=null">#{lastName},</if>
+        <if test="dateOfBirth!=null">#{dateOfBirth},</if>
+        <if test="gender!=null">#{gender},</if>
+        <if test="address!=null">#{address},</if>
+        <if test="city!=null">#{city},</if>
+        <if test="postalCode!=null">#{postalCode},</if>
+        <if test="country!=null">#{country},</if>
+        <if test="departmentId!=null">#{departmentId},</if>
+        <if test="roleId!=null">#{roleId},</if>
+        #{username},#{passwordHash})
+    </insert>
 </mapper>

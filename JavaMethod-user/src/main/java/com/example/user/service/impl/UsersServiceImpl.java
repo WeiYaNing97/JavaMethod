@@ -4,6 +4,7 @@ import com.example.user.entity.Users;
 import com.example.user.mapper.UsersMapper;
 import com.example.user.service.IUsersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements IUsersService {
 
+    @Autowired
+    private UsersMapper usersMapper;
+    @Override
+    public boolean add(Users users) {
+        return usersMapper.add(users);
+    }
 }

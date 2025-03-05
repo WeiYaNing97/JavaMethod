@@ -16,7 +16,6 @@
         <module>JavaMethod-quartz</module>
         <module>JavaMethod-es</module>
         <module>JavaMethod-websocket</module>
-        <module>JavaMethod-security</module>
     </modules>
 
     <parent>
@@ -196,17 +195,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version> <!-- 请将“最新版本号”替换为实际的版本号，例如：1.2.75 -->
-        </dependency>
-
-
-        <!-- Spring Security Starter -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
         </dependency>
 
 

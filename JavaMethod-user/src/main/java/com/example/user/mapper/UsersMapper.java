@@ -15,4 +15,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UsersMapper extends BaseMapper<Users> {
 
+    boolean add(Users users);
 }

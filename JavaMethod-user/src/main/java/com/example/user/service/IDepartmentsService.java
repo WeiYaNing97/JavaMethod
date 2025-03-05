@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IDepartmentsService extends IService<Departments> {
 
+    boolean add(Departments departments);
 }

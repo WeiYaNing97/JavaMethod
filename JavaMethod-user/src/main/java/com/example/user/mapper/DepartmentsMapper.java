@@ -3,6 +3,7 @@ package com.example.user.mapper;
 import com.example.user.entity.Departments;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -15,4 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DepartmentsMapper extends BaseMapper<Departments> {
 
+    int add(@Param("departments") Departments departments);
 }

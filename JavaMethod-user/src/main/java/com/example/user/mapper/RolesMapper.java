@@ -15,4 +15,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RolesMapper extends BaseMapper<Roles> {
 
+    int add(Roles roles);
 }

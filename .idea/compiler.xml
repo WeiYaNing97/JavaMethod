@@ -17,10 +17,10 @@
         <module name="JavaMethod-websocket" />
         <module name="JavaMethod-rabbitmq" />
         <module name="JavaMethod-test" />
-        <module name="JavaMethod-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="JavaMethod-security" target="1.8" />
       <module name="JavaMethod-userLogin" target="1.8" />
     </bytecodeTargetLevel>
   </component>

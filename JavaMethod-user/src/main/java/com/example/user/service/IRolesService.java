@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IRolesService extends IService<Roles> {
 
+    boolean add(Roles roles);
 }

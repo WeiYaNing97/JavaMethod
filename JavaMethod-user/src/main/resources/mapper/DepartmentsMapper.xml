@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.user.mapper.DepartmentsMapper">
-
+    <insert id="add"
+            useGeneratedKeys="true" keyProperty="departmentId">
+        insert into departments(
+        <if test="departments.departmentId!=null">department_id,</if>
+        <if test="departments.managerId!=null">manager_id,</if>
+        <if test="departments.location!=null">location,</if>
+        department_name)
+        values (
+        <if test="departments.departmentId!=null">#{departments.departmentId},</if>
+        <if test="departments.managerId!=null">#{departments.managerId},</if>
+        <if test="departments.location!=null">#{departments.location},</if>
+        #{departments.departmentName})
+    </insert>
 </mapper>
