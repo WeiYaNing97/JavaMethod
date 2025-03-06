@@ -49,4 +49,11 @@ public class RolesController {
         boolean delete = rolesService.removeById(roleId);
         return delete? AjaxResult.success() : AjaxResult.error();
     }
+
+    @ApiOperation("更新角色信息")
+    @PutMapping("/update")
+    public AjaxResult update(@RequestBody Roles roles) {
+        boolean b = rolesService.updateById(roles);
+        return b?AjaxResult.success():AjaxResult.error();
+    }
 }

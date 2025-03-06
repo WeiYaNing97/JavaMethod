@@ -49,4 +49,11 @@ public class PermissionsController {
         boolean delete = permissionsService.removeById(id);
         return delete?AjaxResult.success():AjaxResult.error();
     }
+
+    @ApiOperation("更新权限信息")
+    @PutMapping("/update")
+    public AjaxResult update(@RequestBody Permissions permissions) {
+        boolean b = permissionsService.updateById(permissions);
+        return b?AjaxResult.success():AjaxResult.error();
+    }
 }

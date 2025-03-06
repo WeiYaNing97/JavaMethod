@@ -2,6 +2,7 @@ package com.example.user.controller;
 
 
 import com.example.method.result.AjaxResult;
+import com.example.user.entity.Roles;
 import com.example.user.entity.Users;
 import com.example.user.service.IUsersService;
 import io.swagger.annotations.Api;
@@ -45,5 +46,12 @@ public class UsersController {
     public AjaxResult delete(@PathVariable Integer id) {
         boolean delete = usersService.removeById(id);
         return delete? AjaxResult.success() : AjaxResult.error();
+    }
+
+    @ApiOperation("更新用户信息")
+    @PutMapping("/update")
+    public AjaxResult update(@RequestBody Users users) {
+        boolean b = usersService.updateById(users);
+        return b?AjaxResult.success():AjaxResult.error();
     }
 }

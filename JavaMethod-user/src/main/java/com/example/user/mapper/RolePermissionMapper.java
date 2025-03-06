@@ -3,6 +3,7 @@ package com.example.user.mapper;
 import com.example.user.entity.RolePermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.repository.query.Param;
 
 /**
  * <p>
@@ -15,4 +16,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
+    int add(RolePermission rolePermission);
+
+    int deleteByRoleId(@Param("roleId") Integer id);
+
+    int updateByRoleId(RolePermission rolePermission);
 }

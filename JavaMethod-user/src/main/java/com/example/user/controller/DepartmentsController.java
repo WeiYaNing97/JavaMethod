@@ -3,6 +3,7 @@ package com.example.user.controller;
 
 import com.example.method.result.AjaxResult;
 import com.example.user.entity.Departments;
+import com.example.user.entity.Permissions;
 import com.example.user.entity.Users;
 import com.example.user.service.IDepartmentsService;
 import io.swagger.annotations.Api;
@@ -47,5 +48,12 @@ public class DepartmentsController {
     public AjaxResult delete(@PathVariable("id") Integer id) {
         boolean delete = departmentsService.removeById(id);
         return delete? AjaxResult.success() : AjaxResult.error();
+    }
+
+    @ApiOperation("更新部门信息")
+    @PutMapping("/update")
+    public AjaxResult update(@RequestBody Departments departments) {
+        boolean b = departmentsService.updateById(departments);
+        return b?AjaxResult.success():AjaxResult.error();
     }
 }
