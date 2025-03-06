@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="JavaMethod-user" />
         <module name="JavaMethod-swagger" />
-        <module name="JavaMethod-es" />
         <module name="JavaMethod-admin" />
         <module name="JavaMethod-utils" />
         <module name="JavaMethod-method" />
@@ -20,7 +19,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="JavaMethod-es" target="1.8" />
       <module name="JavaMethod-security" target="1.8" />
+      <module name="JavaMethod-solr" target="1.8" />
       <module name="JavaMethod-userLogin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -33,6 +34,7 @@
       <module name="JavaMethod-quartz" options="-parameters" />
       <module name="JavaMethod-rabbitmq" options="-parameters" />
       <module name="JavaMethod-security" options="-parameters" />
+      <module name="JavaMethod-solr" options="-parameters" />
       <module name="JavaMethod-swagger" options="-parameters" />
       <module name="JavaMethod-test" options="-parameters" />
       <module name="JavaMethod-user" options="-parameters" />

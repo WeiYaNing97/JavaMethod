@@ -57,8 +57,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
-
-
         <!-- 方法类 -->
         <dependency>
             <groupId>com.example</groupId>
@@ -105,12 +103,6 @@
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>JavaMethod-quartz</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <!--elasticsearch-->
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>JavaMethod-es</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
