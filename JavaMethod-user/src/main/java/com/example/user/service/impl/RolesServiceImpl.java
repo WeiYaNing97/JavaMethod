@@ -33,7 +33,6 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
     public boolean add(Roles roles) {
         // 调用rolesMapper的add方法，将roles对象添加到数据库中
         int insert = rolesMapper.add(roles);
-        System.out.println("Roles = "+roles.getRoleId());
         // 判断插入是否成功，如果insert大于0表示插入成功
         return insert > 0;
     }

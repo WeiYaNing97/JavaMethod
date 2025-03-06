@@ -1,6 +1,7 @@
 package com.example.user.controller;
 
 
+import com.example.method.result.AjaxResult;
 import com.example.user.entity.RolePermission;
 import com.example.user.entity.Users;
 import com.example.user.service.IRolePermissionService;
@@ -33,8 +34,8 @@ public class RolePermissionController {
 
     @ApiOperation("获取角色与权限关联表列表")
     @GetMapping("/getList")
-    public List<RolePermission> getList() {
+    public AjaxResult getList() {
         List<RolePermission> list = rolePermissionService.list();
-        return list;
+        return AjaxResult.success(list);
     }
 }

@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPermissionsService extends IService<Permissions> {
 
+    boolean add(Permissions permissions);
 }

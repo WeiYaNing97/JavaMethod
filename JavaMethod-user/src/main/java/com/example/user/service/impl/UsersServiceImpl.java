@@ -6,6 +6,7 @@ import com.example.user.service.IUsersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -21,6 +22,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     @Autowired
     private UsersMapper usersMapper;
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean add(Users users) {
         return usersMapper.add(users);
     }

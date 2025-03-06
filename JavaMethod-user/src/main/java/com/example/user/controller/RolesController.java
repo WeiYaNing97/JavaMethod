@@ -8,12 +8,10 @@ import com.example.user.service.IRolesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -33,15 +31,22 @@ public class RolesController {
     private IRolesService rolesService;
     @ApiOperation("获取角色列表信息")
     @GetMapping("/getList")
-    public List<Roles> getList() {
+    public AjaxResult getList() {
         List<Roles> list = rolesService.list();
-        return list;
+        return AjaxResult.success(list);
     }
 
     @ApiOperation("添加角色信息")
-    @GetMapping("/add")
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody Roles roles) {
         boolean save = rolesService.add(roles);
         return save? AjaxResult.success() : AjaxResult.error();
+    }
+
+    @ApiOperation("删除角色信息")
+    @DeleteMapping("/delete/{roleId}")
+    public AjaxResult delete(@PathVariable Integer roleId) {
+        boolean delete = rolesService.removeById(roleId);
+        return delete? AjaxResult.success() : AjaxResult.error();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.user.controller;
 
 
+import com.example.method.result.AjaxResult;
 import com.example.user.entity.Permissions;
 import com.example.user.entity.Users;
 import com.example.user.service.IPermissionsService;
@@ -8,11 +9,9 @@ import com.example.user.service.IUsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -32,8 +31,22 @@ public class PermissionsController {
     private IPermissionsService permissionsService;
     @ApiOperation("获取权限信息列表")
     @GetMapping("/getList")
-    public List<Permissions> getList() {
+    public AjaxResult getList() {
         List<Permissions> list = permissionsService.list();
-        return list;
+        return AjaxResult.success(list);
+    }
+
+    @ApiOperation("添加权限信息")
+    @PostMapping("/add")
+    public AjaxResult add(@RequestBody Permissions permissions) {
+        boolean add = permissionsService.add(permissions);
+        return add?AjaxResult.success():AjaxResult.error();
+    }
+
+    @ApiOperation("删除权限信息")
+    @DeleteMapping("/delete/{id}")
+    public AjaxResult delete(@PathVariable Integer id) {
+        boolean delete = permissionsService.removeById(id);
+        return delete?AjaxResult.success():AjaxResult.error();
     }
 }

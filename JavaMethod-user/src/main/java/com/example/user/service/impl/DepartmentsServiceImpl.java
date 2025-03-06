@@ -6,6 +6,7 @@ import com.example.user.service.IDepartmentsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -22,9 +23,9 @@ public class DepartmentsServiceImpl extends ServiceImpl<DepartmentsMapper, Depar
     private DepartmentsMapper departmentsMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean add(Departments departments) {
         int add = departmentsMapper.add(departments);
-        System.out.println("Departments = " + departments.getDepartmentId());
         return  add > 0;
     }
 }
