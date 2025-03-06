@@ -1,7 +1,8 @@
 obtain:
   ymlfile:
     values: '使用注解获取yml文件参数值'
-    time: 1
+    # 定时任务执行时间（秒）
+    time: 60
     logPath: 'D:\home\JavaMethod\logs\'
 
 splitKey: '&&'

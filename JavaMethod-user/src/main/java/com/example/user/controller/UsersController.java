@@ -3,10 +3,12 @@ package com.example.user.controller;
 
 import com.example.method.result.AjaxResult;
 import com.example.user.entity.Roles;
+import com.example.user.entity.UserDetails;
 import com.example.user.entity.Users;
 import com.example.user.service.IUsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +55,12 @@ public class UsersController {
     public AjaxResult update(@RequestBody Users users) {
         boolean b = usersService.updateById(users);
         return b?AjaxResult.success():AjaxResult.error();
+    }
+
+    @ApiOperation("查看用户详情")
+    @GetMapping("/viewUserDetails")
+    public AjaxResult viewUserDetails() {
+        List<UserDetails> userDetailsList = usersService.viewUserDetails();
+        return AjaxResult.success(userDetailsList);
     }
 }

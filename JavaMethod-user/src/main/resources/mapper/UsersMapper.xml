@@ -34,4 +34,52 @@
         <if test="roleId!=null">#{roleId},</if>
         #{username},#{passwordHash})
     </insert>
+    <select id="viewUserDetails" resultType="com.example.user.entity.UserDetails">
+        SELECT
+            urd.user_id AS userId,
+            urd.username AS username,
+            urd.password_hash AS passwordHash,
+            urd.email AS email,
+            urd.phone_number AS phoneNumber,
+            urd.first_name AS firstName,
+            urd.last_name AS lastName,
+            urd.date_of_birth AS dateOfBirth,
+            urd.gender AS gender,
+            urd.address AS address,
+            urd.city AS city,
+            urd.postal_code AS postalCode,
+            urd.country AS country,
+            urd.department_name AS departmentName,
+            urd.role_name AS roleName,
+            urd.description AS roleDescription,
+            permissions.permission_name AS permissionName,
+            permissions.description AS permissionDescription
+        FROM
+            (
+                SELECT
+                    users.user_id,
+                    users.username,
+                    users.password_hash,
+                    users.email,
+                    users.phone_number,
+                    users.first_name,
+                    users.last_name,
+                    users.date_of_birth,
+                    users.gender,
+                    users.address,
+                    users.city,
+                    users.postal_code,
+                    users.country,
+                    users.role_id,
+                    roles.role_name,
+                    roles.description,
+                    departments.department_name
+                FROM
+                    users
+                        LEFT JOIN roles ON users.role_id = roles.role_id
+                        LEFT JOIN departments ON users.department_id = departments.department_id
+            ) urd
+                LEFT JOIN role_permission ON urd.role_id = role_permission.role_id
+                LEFT JOIN permissions ON role_permission.permission_id = permissions.permission_id
+    </select>
 </mapper>
