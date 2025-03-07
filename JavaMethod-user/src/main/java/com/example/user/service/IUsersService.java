@@ -19,4 +19,6 @@ public interface IUsersService extends IService<Users> {
     boolean add(Users users);
 
     List<UserDetails> viewUserDetails();
+
+    Users getByUsername(String username);
 }

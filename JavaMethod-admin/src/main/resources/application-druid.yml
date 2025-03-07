@@ -24,7 +24,16 @@ obtain:
 
 splitKey: '&&'
 nThreads: 10
-
+# elasticsearch日志级别配置
+logging:
+  level:
+    cn:
+      tedu:
+        search: debug
+    org:
+      elasticsearch:
+        client:
+          RestClient: debug
 elasticsearch:
   rest:
     uris: 127.0.0.1:9200

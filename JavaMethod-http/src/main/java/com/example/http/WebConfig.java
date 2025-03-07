@@ -26,6 +26,9 @@ public class WebConfig implements WebMvcConfigurer {
 
         // 将自定义拦截器添加到拦截器注册中心，并设置拦截路径为 /quartz/**
         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/quartz/**");
+
+        // 将自定义拦截器添加到拦截器注册中心，并设置拦截路径为 /**
+        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**");
     }
 
 }

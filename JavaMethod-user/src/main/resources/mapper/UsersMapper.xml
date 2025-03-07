@@ -82,4 +82,7 @@
                 LEFT JOIN role_permission ON urd.role_id = role_permission.role_id
                 LEFT JOIN permissions ON role_permission.permission_id = permissions.permission_id
     </select>
+    <select id="getByUsername" resultType="com.example.user.entity.Users">
+        select * from users where username=#{username}
+    </select>
 </mapper>

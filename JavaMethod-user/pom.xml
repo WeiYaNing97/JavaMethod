@@ -36,6 +36,14 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- JWT 依赖，用于生成和解析 JSON Web Tokens -->
+        <!-- JWT相关 -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
     </dependencies>
 
 

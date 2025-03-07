@@ -21,4 +21,6 @@ public interface UsersMapper extends BaseMapper<Users> {
     boolean add(Users users);
 
     List<UserDetails> viewUserDetails();
+
+    Users getByUsername(String username);
 }

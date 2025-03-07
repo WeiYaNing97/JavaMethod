@@ -27,6 +27,7 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+
         // 获取HTTP请求的方法
         // 在这里获取HTTP请求的相关信息
         String method = request.getMethod();
@@ -34,9 +35,12 @@ public class MyInterceptor implements HandlerInterceptor {
         // 获取HTTP请求的URI
         String uri = request.getRequestURI();
 
+        String token = (String) request.getAttribute("token");
+
         // 打印请求方法和请求URI
         LogUtils.getInfo("请求方法：" + method);
         LogUtils.getInfo("请求URI：" + uri);
+        LogUtils.getInfo("token：" + token);
 
         // ...打印其他信息
         Collection<String> responseheaderNames = response.getHeaderNames();

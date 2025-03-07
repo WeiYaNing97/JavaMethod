@@ -14,6 +14,8 @@ spring:
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
+
+  #elasticsearch
   elasticsearch:
     uris: https://127.0.0.1:9200
   profiles:
@@ -41,6 +43,11 @@ spring:
     title: 用户接口文档
     description: 用户接口文档
     version: 1.0
+  # 配置安全认证信息 对登录的用户名/密码进行配置
+  security:
+    user:
+      name: root
+      password: root
   # 配置thymeleaf模板引擎 websocket配置
   thymeleaf:
     mode: HTML
@@ -50,12 +57,3 @@ spring:
     suffix: .html
     check-template-location: true
     template-resolver-order: 1
-logging:
-  level:
-    cn:
-      tedu:
-        search: debug
-    org:
-      elasticsearch:
-        client:
-          RestClient: debug

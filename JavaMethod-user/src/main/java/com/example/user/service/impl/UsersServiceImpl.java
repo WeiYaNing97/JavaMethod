@@ -34,4 +34,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     public List<UserDetails> viewUserDetails() {
         return usersMapper.viewUserDetails();
     }
+
+    @Override
+    public Users getByUsername(String username) {
+        return usersMapper.getByUsername(username);
+    }
 }

@@ -15,7 +15,7 @@
         <module>JavaMethod-swagger</module>
         <module>JavaMethod-quartz</module>
         <module>JavaMethod-websocket</module>
-        <module>JavaMethod-elasticsearch</module>
+        <module>JavaMethod-security</module>
     </modules>
 
     <parent>
@@ -37,15 +37,13 @@
         <mybatis.plus.boot.version>3.5.1</mybatis.plus.boot.version>
         <commons.lang3.version>3.12.0</commons.lang3.version>
         <hutool.version>5.8.26</hutool.version>
-        <jjwt.version>0.12.6</jjwt.version>
+        <jjwt.version>0.7.0</jjwt.version>
         <swagger.version>2.9.2</swagger.version>
         <dynamic.datasource.version>3.5.1</dynamic.datasource.version>
         <spring.context.support.version>5.3.10</spring.context.support.version>
         <freemarker.version>2.3.31</freemarker.version>
         <websocket.version>2.7.12</websocket.version>
         <fastjson.version>1.2.83</fastjson.version>
-        <fastjson.version>1.2.83</fastjson.version>
-        <elasticsearch.version>8.17.3</elasticsearch.version>
     </properties>
 
     <dependencies>
@@ -193,22 +191,11 @@
 
 
         <!-- JWT 依赖，用于生成和解析 JSON Web Tokens -->
+        <!-- JWT相关 -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
+            <artifactId>jjwt</artifactId>
             <version>${jjwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>${jjwt.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>${jjwt.version}</version>
-            <scope>runtime</scope>
         </dependency>
 
 
@@ -218,12 +205,6 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!--elasticsearch-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency>
-
-
+        <!-- security -->
     </dependencies>
 </project>
