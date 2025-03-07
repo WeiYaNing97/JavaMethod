@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="JavaMethod-user" />
         <module name="JavaMethod-swagger" />
+        <module name="JavaMethod-elasticsearch" />
         <module name="JavaMethod-admin" />
         <module name="JavaMethod-utils" />
         <module name="JavaMethod-method" />
@@ -28,6 +29,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="JavaMethod-admin" options="-parameters" />
+      <module name="JavaMethod-elasticsearch" options="-parameters" />
       <module name="JavaMethod-es" options="-parameters" />
       <module name="JavaMethod-http" options="-parameters" />
       <module name="JavaMethod-method" options="-parameters" />

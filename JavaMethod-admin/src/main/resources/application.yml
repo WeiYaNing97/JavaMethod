@@ -14,6 +14,8 @@ spring:
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
+  elasticsearch:
+    uris: https://127.0.0.1:9200
   profiles:
     # 引入其他yml配置
     active: druid
@@ -48,4 +50,12 @@ spring:
     suffix: .html
     check-template-location: true
     template-resolver-order: 1
-
+logging:
+  level:
+    cn:
+      tedu:
+        search: debug
+    org:
+      elasticsearch:
+        client:
+          RestClient: debug
