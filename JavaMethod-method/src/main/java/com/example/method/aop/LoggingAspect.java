@@ -4,6 +4,7 @@ package com.example.method.aop;
 import com.example.method.file.WriteToFile;
 import com.example.method.log.LogUtils;
 import com.example.utils.util.DateUtils;
+import com.example.utils.util.MyUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -37,7 +38,6 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
     @Value("${obtain.ymlfile.logPath}")
-
     private String logPath;
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
@@ -78,19 +78,18 @@ public class LoggingAspect {
     @Before("execution(* com.example..service.*.*(..))")
     public void beforeAdvice(JoinPoint joinPoint) {
         // 记录日志，输出正在执行的前置通知方法的信息
-        logger.info("(前置通知) Before method: " + joinPoint.getSignature());
-
+        //logger.info("(前置通知) Before method: " + joinPoint.getSignature());
         // 获取当前时间的日志信息
-        String info = LogUtils.getInfo(DateUtils.getTime());
+        //String info = LogUtils.getInfo(DateUtils.getTime());
         // 拼接日志信息，并输出到日志文件中
-        String information = info + "(前置通知) Before method: " + joinPoint.getSignature();
-        WriteToFile.writeString(information,logPath+"/log.txt");
+        //String information = info + "(前置通知) Before method: " + joinPoint.getSignature();
+        //WriteToFile.writeString(information,logPath+"/log.txt");
     }
 
     // 后置通知
     @AfterReturning(pointcut = "execution(* com.example..service.*.*(..))", returning = "result")
     public void afterReturningAdvice(JoinPoint joinPoint, Object result) {
-        logger.info("(后置通知) After returning method: " + joinPoint.getSignature() + " with result: " + result);
+        //logger.info("(后置通知) After returning method: " + joinPoint.getSignature() + " with result: " + result);
     }
 
     // 异常通知
@@ -101,27 +100,27 @@ public class LoggingAspect {
         logger.error("(异常通知) After throwing method: " + joinPoint.getSignature() + " with exception: " + ex);
 
         // 获取当前时间的警告信息
-        String warning = LogUtils.getWarning(DateUtils.getTime());
+        //String warning = LogUtils.getWarning(DateUtils.getTime());
 
         // 拼接日志信息
-        String information = warning + "(异常通知) After throwing method: " + joinPoint.getSignature() + " with exception: " + ex;
+        //String information = warning + "(异常通知) After throwing method: " + joinPoint.getSignature() + " with exception: " + ex;
 
         // 将日志信息写入到文件中
-        WriteToFile.writeString(information,logPath+"/log.txt");
+        //WriteToFile.writeString(information,logPath+"/"+ MyUtils.getDate("yyyy-MM-dd") +"log.txt");
     }
 
     // 最终通知
     @After("execution(* com.example..service.*.*(..))")
     public void afterAdvice(JoinPoint joinPoint) {
-        logger.info("(最终通知) After method: " + joinPoint.getSignature());
+        //logger.info("(最终通知) After method: " + joinPoint.getSignature());
     }
 
     // 环绕通知
     @Around("execution(* com.example..service.*.*(..))")
     public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
-        logger.info("(环绕通知) Before method: " + joinPoint.getSignature());
+        //logger.info("(环绕通知) Before method: " + joinPoint.getSignature());
         Object result = joinPoint.proceed();
-        logger.info("(环绕通知) After method: " + joinPoint.getSignature());
+        //ogger.info("(环绕通知) After method: " + joinPoint.getSignature());
         return result;
     }
 

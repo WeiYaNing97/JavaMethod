@@ -26,7 +26,7 @@ public class ScoresController {
     @Autowired
     private IScoresService scoresService;
     @Autowired
-    RedisService redisService;
+    private RedisService redisService;
 
     @RequestMapping("/sum")
     @ApiOperation(value = "获取各班各学生总分"  ,notes = "获取各班各学生总分信息")

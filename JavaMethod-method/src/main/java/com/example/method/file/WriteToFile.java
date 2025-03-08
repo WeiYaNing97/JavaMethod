@@ -1,4 +1,6 @@
 package com.example.method.file;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,9 +10,10 @@ import java.util.List;
 /**
  * 写入文件内容，
  */
+@Component
 public class WriteToFile {
 
-    public static void writeString(String value, String url) {
+    public void writeString(String value, String url) {
         try {
             // 创建一个File对象，指定文件路径
             File file = new File(url);
@@ -51,7 +54,7 @@ public class WriteToFile {
     }
 
 
-    public static void writeStringList(List<String> values, String url) {
+    public void writeStringList(List<String> values, String url) {
         try {
             // 创建一个File对象，指定文件路径
             File file = new File(url);

@@ -26,9 +26,11 @@ public class TokenUtils {
         return token;
     }
     //token验证
-    public static Claims verifyToken(String token){
-        try {
-            //从token中解析出claims
+    public static Claims verifyToken(String token) throws Exception {
+        //从token中解析出claims
+        Claims claims=Jwts.parser().setSigningKey(PRI_SECRET).parseClaimsJws(token).getBody();
+        return claims;
+        /*try {
             Claims claims=Jwts.parser().setSigningKey(PRI_SECRET).parseClaimsJws(token).getBody();
             return claims;
         } catch (ExpiredJwtException e) {
@@ -41,6 +43,6 @@ public class TokenUtils {
             throw new RuntimeException(e);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 }

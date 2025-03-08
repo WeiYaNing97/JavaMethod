@@ -2,12 +2,12 @@ package com.example.login.controller;
 
 import com.example.login.entity.UserLogin;
 import com.example.login.token.TokenUtils;
+import com.example.method.log.LogUtils;
 import com.example.method.result.AjaxResult;
 import com.example.user.entity.Users;
 import com.example.user.service.IUsersService;
 import com.example.utils.util.PasswordUtil;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.*;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +25,9 @@ public class UserLoginController {
     private IUsersService usersService;
     @Autowired
     private PasswordUtil passwordUtil;
+    @Autowired
+    LogUtils logUtils;
+
     @GetMapping("/login")
     public AjaxResult login(@RequestBody UserLogin userLogin){
         //token为空则返回失败，否则返回成功
@@ -38,20 +41,22 @@ public class UserLoginController {
             boolean resolveHashPassword = passwordUtil.resolveHashPassword(userLogin.getPassword(), users.getPasswordHash());
             if (resolveHashPassword){
                 String token = TokenUtils.genToken(users);
+
                 try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    Claims claims = TokenUtils.verifyToken(token);
-                    if (claims != null){
-                        return AjaxResult.success("登录成功");
-                    }
-                } catch (ExpiredJwtException e) {
-                    return AjaxResult.error("token超时,验证失败");
+                Claims claims = null;
+                try {
+                    claims = TokenUtils.verifyToken(token);
+                } catch (Exception e) {
+                    logUtils.setExceptionInLog(e);
+                    return AjaxResult.success("token验证失败");
+                }
+                if (claims != null){
+                    return AjaxResult.success("登录成功");
                 }
             }
         } catch (NoSuchAlgorithmException e) {

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
 public class Constant {
     // 令牌自定义标识
     @Value("${obtain.ymlfile.logPath}")
-    private String logPath;
+    public String logPath;
 }
