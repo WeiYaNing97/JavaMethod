@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="JavaMethod-user" />
         <module name="JavaMethod-swagger" />
-        <module name="JavaMethod-elasticsearch" />
         <module name="JavaMethod-admin" />
         <module name="JavaMethod-utils" />
         <module name="JavaMethod-method" />
@@ -17,12 +16,12 @@
         <module name="JavaMethod-websocket" />
         <module name="JavaMethod-rabbitmq" />
         <module name="JavaMethod-test" />
-        <module name="JavaMethod-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JavaMethod-elasticsearch" target="1.8" />
       <module name="JavaMethod-es" target="1.8" />
+      <module name="JavaMethod-security" target="1.8" />
       <module name="JavaMethod-solr" target="1.8" />
       <module name="JavaMethod-userLogin" target="1.8" />
     </bytecodeTargetLevel>

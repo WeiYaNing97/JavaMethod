@@ -2,7 +2,6 @@ package com.example.login.controller;
 
 import com.example.login.entity.UserLogin;
 import com.example.login.token.TokenUtils;
-import com.example.method.log.LogUtils;
 import com.example.method.result.AjaxResult;
 import com.example.user.entity.Users;
 import com.example.user.service.IUsersService;
@@ -11,10 +10,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 
 @RestController

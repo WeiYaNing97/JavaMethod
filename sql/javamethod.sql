@@ -1,7 +1,7 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Dump SQL
 
- Source Server         : mysql
+ Source Server         : MySQL
  Source Server Type    : MySQL
  Source Server Version : 80018 (8.0.18)
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 80018 (8.0.18)
  File Encoding         : 65001
 
- Date: 05/03/2025 17:14:00
+ Date: 08/03/2025 19:29:58
 */
 
 SET NAMES utf8mb4;
@@ -29,11 +29,7 @@ CREATE TABLE `departments`  (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`department_id`) USING BTREE,
   UNIQUE INDEX `department_name`(`department_name` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '部门信息表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of departments
--- ----------------------------
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '部门信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for permissions
@@ -42,15 +38,27 @@ DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions`  (
   `permission_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '权限ID',
   `permission_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '权限名称',
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '权限描述',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '权限标识',
+  `parent_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '父菜单ID',
+  `order_num` int(4) NULL DEFAULT NULL COMMENT '显示顺序',
+  `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '路由地址',
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '组件路径',
+  `query` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '路由参数',
+  `route_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '路由名称',
+  `is_frame` int(1) NULL DEFAULT NULL COMMENT '是否为外链（0是 1否）',
+  `is_cache` int(1) NULL DEFAULT NULL COMMENT '是否缓存（0缓存 1不缓存）',
+  `permissions_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '菜单类型（M目录 C菜单 F按钮）',
+  `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '菜单状态（0显示 1隐藏）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '菜单状态（0正常 1停用）',
+  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '菜单图标',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`permission_id`) USING BTREE,
   UNIQUE INDEX `permission_name`(`permission_name` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '权限信息表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of permissions
--- ----------------------------
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '权限信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for role_permission
@@ -64,11 +72,7 @@ CREATE TABLE `role_permission`  (
   INDEX `permission_id`(`permission_id` ASC) USING BTREE,
   CONSTRAINT `role_permission_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `role_permission_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`permission_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色与权限关联表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of role_permission
--- ----------------------------
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色与权限关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for roles
@@ -81,11 +85,7 @@ CREATE TABLE `roles`  (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`role_id`) USING BTREE,
   UNIQUE INDEX `role_name`(`role_name` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of roles
--- ----------------------------
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for scores
@@ -100,22 +100,6 @@ CREATE TABLE `scores`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of scores
--- ----------------------------
-INSERT INTO `scores` VALUES (1, 1, '语文', '32');
-INSERT INTO `scores` VALUES (2, 1, '数学', '43');
-INSERT INTO `scores` VALUES (3, 1, '外语', '54');
-INSERT INTO `scores` VALUES (4, 2, '语文', '65');
-INSERT INTO `scores` VALUES (5, 2, '数学', '76');
-INSERT INTO `scores` VALUES (6, 2, '外语', '77');
-INSERT INTO `scores` VALUES (7, 3, '语文', '21');
-INSERT INTO `scores` VALUES (8, 3, '数学', '31');
-INSERT INTO `scores` VALUES (9, 3, '外语', '41');
-INSERT INTO `scores` VALUES (10, 4, '语文', '51');
-INSERT INTO `scores` VALUES (11, 4, '数学', '61');
-INSERT INTO `scores` VALUES (12, 4, '外语', '71');
-
--- ----------------------------
 -- Table structure for student
 -- ----------------------------
 DROP TABLE IF EXISTS `student`;
@@ -125,14 +109,6 @@ CREATE TABLE `student`  (
   `class_name` char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '班级名称',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of student
--- ----------------------------
-INSERT INTO `student` VALUES (1, '张三', '一班');
-INSERT INTO `student` VALUES (2, '李四', '二班');
-INSERT INTO `student` VALUES (3, '王五', '二班');
-INSERT INTO `student` VALUES (4, '赵六', '三班');
 
 -- ----------------------------
 -- Table structure for users
@@ -160,16 +136,6 @@ CREATE TABLE `users`  (
   UNIQUE INDEX `username`(`username` ASC) USING BTREE,
   UNIQUE INDEX `email`(`email` ASC) USING BTREE,
   UNIQUE INDEX `phone_number`(`phone_number` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of users
--- ----------------------------
-
--- ----------------------------
--- View structure for user_role_name
--- ----------------------------
-DROP VIEW IF EXISTS `user_role_name`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `user_role_name` AS select `user`.`user_name` AS `user_name`,`role`.`role_name` AS `role_name` from ((`user` join `role`) join `user_role`) where ((`user_role`.`user_id` = `user`.`user_id`) and (`user_role`.`role_id` = `role`.`role_id`));
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -53,7 +53,7 @@
             urd.role_name AS roleName,
             urd.description AS roleDescription,
             permissions.permission_name AS permissionName,
-            permissions.description AS permissionDescription
+            permissions.remark AS permissionDescription
         FROM
             (
                 SELECT

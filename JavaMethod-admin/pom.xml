@@ -119,14 +119,6 @@
             <artifactId>JavaMethod-quartz</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-        <!-- security -->
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>JavaMethod-security</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
     <build>
