@@ -32,10 +32,10 @@ public class ScoresController {
     @ApiOperation(value = "获取各班各学生总分"  ,notes = "获取各班各学生总分信息")
     public List<ClassStudentSUM> getSumScores() {
         if (redisService.hasKey("sumScores")) {
-            LogUtils.getInfo("从缓存中获取数据");
+            LogUtils.info("从缓存中获取数据");
             return redisService.getCacheObject("sumScores");
         }else {
-            LogUtils.getInfo("从数据库中获取数据");
+            LogUtils.info("从数据库中获取数据");
             List<ClassStudentSUM> classStudentSUMList = scoresService.getSumScores();
             redisService.setCacheObject("sumScores", classStudentSUMList, 10, TimeUnit.MINUTES);
             return classStudentSUMList;
@@ -46,10 +46,10 @@ public class ScoresController {
     @ApiOperation(value = "获取各班各科目平均分"  ,notes = "获取各班各科目平均分信息")
     public List<ClassSubjectAVG> getAvgScores() {
         if (redisService.hasKey("avgScores")) {
-            LogUtils.getInfo("从缓存中获取数据");
+            LogUtils.info("从缓存中获取数据");
             return redisService.getCacheObject("avgScores");
         }else {
-            LogUtils.getInfo("从数据库中获取数据");
+            LogUtils.info("从数据库中获取数据");
             List<ClassSubjectAVG> classSubjectAVGList = scoresService.getAvgScores();
             redisService.setCacheObject("avgScores", classSubjectAVGList, 10, TimeUnit.MINUTES);
             return classSubjectAVGList;

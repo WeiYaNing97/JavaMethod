@@ -38,14 +38,14 @@ public class MyInterceptor implements HandlerInterceptor {
         String token = (String) request.getAttribute("token");
 
         // 打印请求方法和请求URI
-        LogUtils.getInfo("请求方法：" + method);
-        LogUtils.getInfo("请求URI：" + uri);
-        LogUtils.getInfo("token：" + token);
+        LogUtils.info("请求方法：" + method);
+        LogUtils.info("请求URI：" + uri);
+        LogUtils.info("token：" + token);
 
         // ...打印其他信息
         Collection<String> responseheaderNames = response.getHeaderNames();
         for (String name : responseheaderNames) {
-            LogUtils.getInfo(name + " : " + response.getHeader(name));
+            LogUtils.info(name + " : " + response.getHeader(name));
         }
 
 
@@ -55,7 +55,7 @@ public class MyInterceptor implements HandlerInterceptor {
             while (requestheaderNames.hasMoreElements()) {
                 String name = requestheaderNames.nextElement();
                 // 打印请求头的名称和值
-                LogUtils.getInfo("Header：" + name + "=" + request.getHeader(name));
+                LogUtils.info("Header：" + name + "=" + request.getHeader(name));
             }
         }
 
@@ -64,7 +64,7 @@ public class MyInterceptor implements HandlerInterceptor {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 // 打印Cookie信息
-                LogUtils.getInfo("Cookie：" + cookie);
+                LogUtils.info("Cookie：" + cookie);
             }
         }
 
@@ -72,7 +72,7 @@ public class MyInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         if (session != null) {
             // 打印Session ID
-            LogUtils.getInfo("Session ID：" + session.getId());
+            LogUtils.info("Session ID：" + session.getId());
         }
 
         // 如果一切正常，则返回true表示继续执行请求
@@ -91,7 +91,7 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         // 请求处理完成后的逻辑
-        LogUtils.getInfo("请求处理完成  postHandle= " + handler.toString());
+        LogUtils.info("请求处理完成  postHandle= " + handler.toString());
     }
 
     /**
@@ -106,7 +106,7 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 请求完成后的逻辑
-        LogUtils.getInfo("请求处理完成  afterCompletion= " + handler.toString());
+        LogUtils.info("请求处理完成  afterCompletion= " + handler.toString());
     }
 }
 

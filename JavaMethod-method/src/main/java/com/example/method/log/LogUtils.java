@@ -2,19 +2,26 @@ package com.example.method.log;
 
 import com.example.method.file.WriteToFile;
 import com.example.utils.util.MyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
  * 处理并记录日志文件
- * 
+ * 在Spring Boot中整合日志记录（Logger）是非常简单的，
+ * 因为Spring Boot已经为Java Util Logging、Log4J2和Logback提供了默认配置。
+ * 默认情况下，Spring Boot使用的是Logback作为其日志框架。
+ *
+ * 1. 默认配置
+ * 如果你不想做任何额外配置，Spring Boot会自动为你配置一个基础的日志设置。这意味着你可以直接使用org.slf4j.Logger和org.slf4j.LoggerFactory来创建你的logger，并开始记录信息。
+ * 2: 自定义配置 如果你想自定义日志配置，你可以通过在resources目录下创建logback-spring.xml或log4j2-spring.xml文件来实现。
+ * 可以配置日志框架来删除过期的日志文件。以Logback为例，你可以使用TimeBasedRollingPolicy或SizeAndTimeBasedRollingPolicy策略，并结合maxHistory属性来实现自动删除过期日志文件的功能。
  * @author ruoyi
  */
 @Component
@@ -25,7 +32,7 @@ public class LogUtils {
     @Autowired
     private WriteToFile writeToFile;
 
-    private static final Logger LOGGER = Logger.getLogger(LogUtils.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogUtils.class.getName());
     /*LOGGER.info("这是一条信息级别的日志");
       LOGGER.warning("这是一条警告级别的日志");
       LOGGER.severe("这是一条严重级别的日志");*/
@@ -36,7 +43,7 @@ public class LogUtils {
      * @param msg 要输出的信息日志消息，如果为null，则默认为空字符串
      * @return 包含方括号的信息日志字符串
      */
-    public static String getInfo(Object msg)
+    public static String info(Object msg)
     {
         if (msg == null)
         {
@@ -53,14 +60,14 @@ public class LogUtils {
      * @param msg 要输出的警告日志消息，如果为null，则默认为空字符串
      * @return 包含方括号的警告日志字符串
      */
-    public static String getWarning(Object msg)
+    public static String warn(Object msg)
     {
         if (msg == null)
         {
             msg = "";
         }
         String log = "[" + msg.toString() + "]";
-        LOGGER.warning(log);
+        LOGGER.warn(log);
         return log;
     }
 
@@ -70,14 +77,14 @@ public class LogUtils {
      * @param msg 要输出的消息对象，可以为null，但会被转换为空字符串
      * @return 带有方括号的消息字符串
      */
-    public static String getSevere(Object msg)
+    public static String error(Object msg)
     {
         if (msg == null)
         {
             msg = "";
         }
         String log = "[" + msg + "]";
-        LOGGER.severe(log);
+        LOGGER.error(log);
         return log;
     }
 
@@ -91,7 +98,7 @@ public class LogUtils {
     public String setExceptionInLog(Exception exception)
     {
         // 获取异常信息的字符串表示
-        String severe = getSevere(exception);
+        String severe = error(exception);
 
         // 获取当前日期时间字符串
         String date ="["+MyUtils.getDate("yyyy-MM-dd HH:mm:ss")+"] ";

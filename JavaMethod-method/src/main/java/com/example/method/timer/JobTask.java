@@ -10,7 +10,7 @@ public class JobTask extends TimerTask {
     @Override
     public void run() {
 
-        LogUtils.getInfo("[" + DateUtils.getTime() + "] ====== JobTimer 定时任务开启 ： com.example.method.timer.JobTimer ======");
+        LogUtils.info("[" + DateUtils.getTime() + "] ====== JobTimer 定时任务开启 ： com.example.method.timer.JobTimer ======");
 
     }
 }
