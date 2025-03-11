@@ -19,7 +19,7 @@ public class TopicConsumer {
      */
     @RabbitListener(bindings = @QueueBinding(
             // 队列绑定配置
-            value = @Queue(name = "boottopicqueue01"), // 队列名
+            value = @Queue(name = "boottopicqueue"), // 队列名
             // 交换机绑定配置
             exchange = @Exchange(name = "boottopicexchange",type = "topic"), // 交换机名 交换机类型为topic
             // 路由键配置，匹配"error.*"或"info.*"模式的消息
@@ -46,7 +46,7 @@ public class TopicConsumer {
      */
     @RabbitListener(bindings = @QueueBinding(
             // 队列绑定配置
-            value = @Queue(name = "boottopicqueue02"), // 队列名
+            value = @Queue(name = "boottopicqueue"), // 队列名
             // 交换机绑定配置
             exchange = @Exchange(name = "boottopicexchange",type = "topic"), // 交换机名 交换机类型为topic
             // 路由键配置，匹配"error.*"或"info.*"模式的消息

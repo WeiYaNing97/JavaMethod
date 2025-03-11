@@ -36,7 +36,7 @@ public class RabbitMQController {
     public String workMessage() {/*String msg*/
 
         for (int i = 1; i <= 10; i++) {
-            workProducer.sendMessage("work"+i);
+            workProducer.sendMessage("work "+i);
         }
 
         System.out.println("Message sent!");
@@ -57,7 +57,7 @@ public class RabbitMQController {
     @GetMapping("/routing")
     public String routingMessage() {/*String key,String msg*/
         String key ="info";
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 100; i++) {
             String msg = "msg"+i;
             routingProducer.sendMessage(key,msg);
         }
@@ -70,7 +70,7 @@ public class RabbitMQController {
     public String topicMessage() {/*String key,String msg*/
 
         String key ="info.aaa";
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 100; i++) {
             String msg = "msg"+i;
             topicProducer.sendMessage(key,msg);
         }

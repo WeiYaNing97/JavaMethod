@@ -34,6 +34,9 @@ spring:
     port: 5672
     username: root
     password: root
+    listener:
+      simple:
+        acknowledge-mode: MANUAL
   # 配置swagger
   mvc:
     pathmatch:
