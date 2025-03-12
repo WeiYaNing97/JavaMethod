@@ -36,7 +36,7 @@ public class WorkConsumer {
     public void receiveMsgTWO(String msg, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws IOException {
         try {
             if (channel.isOpen()) {
-                System.out.println("消费者2 收到消息:" + msg);
+                System.err.println("消费者2 收到消息:" + msg);
                 // 同样增加业务处理逻辑
                 channel.basicAck(deliveryTag, false); // 或者根据需要改成批量确认
             } else {

@@ -1,10 +1,15 @@
 package com.example.rabbitmq.topic;
 
+import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.AmqpHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class TopicConsumer {
@@ -25,13 +30,19 @@ public class TopicConsumer {
             // 路由键配置，匹配"error.*"或"info.*"模式的消息
             key = {"error.*","info.*"}
     ))
-    public void handleMessage(Object message) {
-        // 输出接收到的消息
-        System.err.println("TopicConsumer message01: " + message);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+    public void handleMessage(Object message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
+        if (channel.isOpen()) {
+            // 输出接收到的消息
+            System.err.println("TopicConsumer message01: " + message);
+            // 增加额外的业务处理逻辑
+            // 确保消息处理成功后才进行确认
+            try {
+                channel.basicAck(deliveryTag, false); // 或者根据需要改成批量确认
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Channel is closed, cannot ack/nack");
         }
     }
 
@@ -52,13 +63,19 @@ public class TopicConsumer {
             // 路由键配置，匹配"error.*"或"info.*"模式的消息
             key = {"error.*","info.*"}
     ))
-    public void handleMessage02(Object message) {
-        // 输出接收到的消息
-        System.err.println("TopicConsumer message02: " + message);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+    public void handleMessage02(Object message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
+        if (channel.isOpen()) {
+            // 输出接收到的消息
+            System.err.println("TopicConsumer message02: " + message);
+            // 增加额外的业务处理逻辑
+            // 确保消息处理成功后才进行确认
+            try {
+                channel.basicAck(deliveryTag, false); // 或者根据需要改成批量确认
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Channel is closed, cannot ack/nack");
         }
     }
 }

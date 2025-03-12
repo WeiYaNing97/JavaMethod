@@ -1,5 +1,6 @@
 package com.example.user.service.impl;
 
+import com.example.user.entity.RolePermissionVO;
 import com.example.user.entity.Roles;
 import com.example.user.mapper.RolesMapper;
 import com.example.user.service.IRolesService;
@@ -8,6 +9,8 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -35,6 +38,11 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
         int insert = rolesMapper.add(roles);
         // 判断插入是否成功，如果insert大于0表示插入成功
         return insert > 0;
+    }
+
+    @Override
+    public List<RolePermissionVO> getRolesDetails() {
+        return  rolesMapper.selectRolesDetailList();
     }
 
 }

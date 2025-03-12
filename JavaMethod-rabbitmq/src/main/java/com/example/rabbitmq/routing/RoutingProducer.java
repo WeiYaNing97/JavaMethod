@@ -21,5 +21,10 @@ public class RoutingProducer {
         /*路由器key可以设置定向参数：error、info、warning*/
         rabbitTemplate.convertAndSend("bootrountingexchange",key,"rounting消息:"+msg);
     }
+    public void sendMessageTWO(String key,String msg) {
+        // 发送消息到名为"bootrountingexchange"的交换机，使用指定的路由键key，并附加消息内容"rounting消息:"+msg
+        /*路由器key可以设置定向参数：error、info、warning*/
+        rabbitTemplate.convertAndSend("bootrountingexchangeTWO",key,"rounting消息:"+msg);
+    }
 }
 

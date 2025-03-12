@@ -3,6 +3,7 @@ package com.example.user.controller;
 
 import com.example.method.result.AjaxResult;
 import com.example.user.entity.Departments;
+import com.example.user.entity.RolePermissionVO;
 import com.example.user.entity.Roles;
 import com.example.user.service.IRolesService;
 import io.swagger.annotations.Api;
@@ -55,5 +56,13 @@ public class RolesController {
     public AjaxResult update(@RequestBody Roles roles) {
         boolean b = rolesService.updateById(roles);
         return b?AjaxResult.success():AjaxResult.error();
+    }
+
+
+    @ApiOperation("获取角色详情信息")
+    @GetMapping("/getRolesDetails")
+    public List<RolePermissionVO> getRolesDetails() {
+        List<RolePermissionVO> rolePermissionVOList = rolesService.getRolesDetails();
+        return rolePermissionVOList;
     }
 }

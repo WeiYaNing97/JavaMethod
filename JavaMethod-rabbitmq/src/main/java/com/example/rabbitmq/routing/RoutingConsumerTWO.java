@@ -11,14 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-/**
- * 总结：
- * 1：如果两个消费者监听同一个队列，即使两消费者的交换机名称不同，也能收到消息。
- * 2：如果两个消费者交换机名称相同，队列也不同，则两个消费者都消费完整的信息。
- * 3：如果两个消费者交换机名称不同相同，队列也不同，则只有与生产者交换机名称相同的消费者消费完整的信息。
- */
 @Component
-public class RoutingConsumer {
+public class RoutingConsumerTWO {
 
 
     /**
@@ -40,16 +34,16 @@ public class RoutingConsumer {
                     // 定义队列，队列名为"bootrountingqueue"
                     // 队列 起名规则（服务名+业务名+成功+队列），durable持久化
                     //value = @Queue(name = "store.addFavorite.success.queue", durable = "true"),
-                    value = @Queue(name = "bootrountingqueue"), //队列名
+                    value = @Queue(name = "bootrountingqueueTWO"), //队列名
                     // 定义交换机，交换机名为"bootrountingexchange"，类型为direct
-                    exchange = @Exchange(name = "bootrountingexchange",type = "direct"), //交换机名 交换机类型为direct
+                    exchange = @Exchange(name = "bootrountingexchangeTWO",type = "direct"), //交换机名 交换机类型为direct
                     // 定义路由键，只处理路由键为"error"、"info"或"zidingyi"的消息
                     key = {"error","info","zidingyi"} //定向参数
             ))
     public void handleMessage(Object message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
         if (channel.isOpen()) {
             // 打印接收到的消息
-            System.err.println("RoutingConsumer message1: " + message);
+            System.out.println("RoutingConsumer message2: " + message);
             // 增加额外的业务处理逻辑
             // 确保消息处理成功后才进行确认
             try {
@@ -61,5 +55,4 @@ public class RoutingConsumer {
             System.out.println("Channel is closed, cannot ack/nack");
         }
     }
-
 }
