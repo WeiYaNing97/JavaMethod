@@ -80,7 +80,13 @@
         <!-- rabbitmq 需要启动rabbitmq服务端-->
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>JavaMethod-rabbitmq</artifactId>
+            <artifactId>JavaMethod-mq-rabbitmq</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- activemq 需要启动activemq服务端-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>JavaMethod-mq-activemq</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--测试模块-->

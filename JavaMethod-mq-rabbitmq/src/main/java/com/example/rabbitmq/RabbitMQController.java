@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-@Api(tags = "RabbitMQController")
+@Api(tags = "RabbitMQ测试接口类")
 @RestController
 @RequestMapping("/RabbitMQController")
 public class RabbitMQController {

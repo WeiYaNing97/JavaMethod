@@ -10,11 +10,12 @@
         <module>JavaMethod-utils</module>
         <module>JavaMethod-user</module>
         <module>JavaMethod-test</module>
-        <module>JavaMethod-rabbitmq</module>
+        <module>JavaMethod-mq-rabbitmq</module>
         <module>JavaMethod-http</module>
         <module>JavaMethod-swagger</module>
         <module>JavaMethod-quartz</module>
         <module>JavaMethod-websocket</module>
+        <module>JavaMethod-mq-activemq</module>
     </modules>
 
     <parent>
@@ -176,5 +177,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!-- activemq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

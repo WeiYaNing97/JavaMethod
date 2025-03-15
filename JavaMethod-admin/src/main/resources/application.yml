@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: JavaMethod
+  # activemq
+  activemq:
+    broker-url: tcp://123.57.51.130:61617
+    user: root
+    password: root
+  # 数据源配置
   datasource:
     dynamic:
       primary: master
