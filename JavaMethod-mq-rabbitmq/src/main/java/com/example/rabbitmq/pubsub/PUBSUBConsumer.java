@@ -1,10 +1,15 @@
 package com.example.rabbitmq.pubsub;
 
+import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.AmqpHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 /**
  * fanout 类型的交换机介绍
@@ -52,7 +57,19 @@ public class PUBSUBConsumer {
                     value = @Queue(name = "QueueName01",durable = "true"),
                     // 将队列绑定到一个名为 "boot_pubsub" 的 fanout 类型的交换机
                     exchange = @Exchange(name = "boot_pubsub",type = "fanout")))
-    public void handleMessage(Object message) {
+    public void handleMessage(Object message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // 确保消息处理成功后才进行确认
+        try {
+            channel.basicAck(deliveryTag, false); // 或者根据需要改成批量确认
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         // 输出接收到的消息
         System.err.println("handleMessageReceived message: " + message);
     }
@@ -63,7 +80,18 @@ public class PUBSUBConsumer {
             bindings = @QueueBinding(
                     value = @Queue(name = "QueueName02",durable = "true"),
                     exchange = @Exchange(name = "boot_pubsub",type = "fanout")))
-    public void handleMessagetTwo(Object message) {
+    public void handleMessagetTwo(Object message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // 确保消息处理成功后才进行确认
+        try {
+            channel.basicAck(deliveryTag, false); // 或者根据需要改成批量确认
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("handleMessagetTwo Received message: " + message);
     }
 }
