@@ -9,6 +9,7 @@ import com.example.user.service.IUsersService;
 import com.example.utils.util.PasswordUtil;
 import io.jsonwebtoken.*;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,7 @@ public class UserLoginController {
     @Autowired
     LogUtils logUtils;
 
+    @ApiOperation(value = "用户登录")
     @GetMapping("/login")
     public AjaxResult login(@RequestBody UserLogin userLogin){
         //token为空则返回失败，否则返回成功

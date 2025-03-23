@@ -2,12 +2,15 @@ package com.example.quartz.controller;
 
 import com.example.quartz.bean.QuartzBean;
 import com.example.quartz.utils.QuartzUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(tags = "定时任务管理")
 @RestController
 @RequestMapping("/quartz")
 public class QuartzController {
@@ -23,6 +26,7 @@ public class QuartzController {
      */
     @RequestMapping("/createJob")
     @ResponseBody
+    @ApiOperation(value = "创建定时任务")
     public String createJob()  {
         try {
             // 创建QuartzBean对象
@@ -46,6 +50,7 @@ public class QuartzController {
 
     @RequestMapping("/pauseJob")
     @ResponseBody
+    @ApiOperation(value = "暂停定时任务")
     public String  pauseJob()  {
         try {
             QuartzUtils.pauseScheduleJob (scheduler,"test");
@@ -57,6 +62,7 @@ public class QuartzController {
 
     @RequestMapping("/runOnce")
     @ResponseBody
+    @ApiOperation(value = "运行一次")
     public String  runOnce()  {
         try {
             QuartzUtils.runOnce (scheduler,"test");
@@ -68,6 +74,7 @@ public class QuartzController {
 
     @RequestMapping("/resume")
     @ResponseBody
+    @ApiOperation(value = "启动定时任务")
     public String  resume()  {
         try {
             QuartzUtils.resumeScheduleJob(scheduler,"test");
@@ -79,6 +86,7 @@ public class QuartzController {
 
     @RequestMapping("/update")
     @ResponseBody
+    @ApiOperation(value = "更新定时任务")
     public String  update(QuartzBean quartzBean)  {
         try {
             quartzBean.setJobClass("com.hjljy.blog.Quartz.TaskForEvery");

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * 长城汽车面试题目：
  */
 @RestController
-@Api(tags = "学生成绩")
+@Api(tags = "长城汽车面试题目")
 @RequestMapping("/studentscores/scores")
 public class ScoresController {
 
