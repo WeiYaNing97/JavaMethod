@@ -10,7 +10,7 @@ spring:
     password: root
   # jms配置 pub-sub-domain: false 表示用的是 点对点（P2P）模式，true表示用的是 发布/订阅（Pub/Sub）模式
   jms:
-    pub-sub-domain: true
+    pub-sub-domain: true # 默认是false，此处设置为true表示以topic模式进行消息通信
   # 数据源配置
   datasource:
     dynamic:

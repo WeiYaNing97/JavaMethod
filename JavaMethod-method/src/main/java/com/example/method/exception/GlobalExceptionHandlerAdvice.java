@@ -17,9 +17,10 @@ public class GlobalExceptionHandlerAdvice{
     Logger logger = LoggerFactory.getLogger(GlobalExceptionHandlerAdvice.class);
     @ExceptionHandler({Exception.class})// 什么异常的统一处理
     public AjaxResult handlerException(Exception e, HttpServletRequest request, HttpServletResponse response){
+
         // 记录日志
-        logger.error("全局异常处理：{}",e);
-        return AjaxResult.error(500,"服务器内部错误:"+e.getClass());
+        //logger.error("全局异常处理：{}",e);
+        return AjaxResult.error("返回错误:"+e);
     }
 
 }
