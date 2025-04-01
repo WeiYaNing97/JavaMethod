@@ -19,4 +19,12 @@ public class Test {
     @GetMapping("/text")
     public static void text() {
     }
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Hello, world!" + new Date());
+        });
+        thread.run();
+    }
+
 }
