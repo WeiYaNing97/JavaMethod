@@ -27,8 +27,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/user/users")
 public class UsersController {
-    @Autowired
+
     private IUsersService usersService;
+
+    public UsersController(IUsersService usersService) {
+        this.usersService = usersService;
+    }
+
     @ApiOperation("获取用户列表信息")
     @GetMapping("/getList")
     public AjaxResult getList() {

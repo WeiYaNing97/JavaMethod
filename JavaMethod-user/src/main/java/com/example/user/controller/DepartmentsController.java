@@ -11,6 +11,7 @@ import com.example.user.mapper.DepartmentsMapper;
 import com.example.user.service.IDepartmentsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -28,11 +29,13 @@ import java.util.List;
 @Api(tags = "部门信息表")
 @RestController
 @RequestMapping("/user/departments")
+@RequiredArgsConstructor // 注入依赖
 public class DepartmentsController {
-    @Autowired
-    private IDepartmentsService departmentsService;
-    @Autowired
-    private DepartmentsMapper departmentsMapper;
+
+    private final IDepartmentsService departmentsService;
+    private final DepartmentsMapper departmentsMapper;
+
+
     @ApiOperation("获取部门信息列表")
     @GetMapping("/getList")
     public AjaxResult getList() {

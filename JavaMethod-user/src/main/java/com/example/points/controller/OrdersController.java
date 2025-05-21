@@ -30,9 +30,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/points/orders")
 public class OrdersController {
-    @Autowired
     private IOrdersService ordersService;
-    @Autowired
+    public OrdersController(IOrdersService ordersService,OrdersMapper ordersMapper) {
+        this.ordersService = ordersService;
+        this.ordersMapper = ordersMapper;
+    }
     private OrdersMapper ordersMapper;
 
     @ApiOperation("查询订单列表")
@@ -98,6 +100,15 @@ public class OrdersController {
         if (ordersVOS != null){
             return AjaxResult.success(ordersVOS);
         }
+        return AjaxResult.error();
+    }
+
+    @ApiOperation("查询订单详情")
+    @PutMapping("/updateOrders")
+    public AjaxResult UpdateOrders(Long userId) {
+        LambdaQueryWrapper<Orders> lambdaQueryWrapper = new LambdaQueryWrapper();
+
+
         return AjaxResult.error();
     }
 }
