@@ -1,10 +1,13 @@
 package com.example.user.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.method.result.AjaxResult;
 import com.example.user.entity.Departments;
 import com.example.user.entity.Permissions;
 import com.example.user.entity.Users;
+import com.example.user.mapper.DepartmentsMapper;
 import com.example.user.service.IDepartmentsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,11 +31,15 @@ import java.util.List;
 public class DepartmentsController {
     @Autowired
     private IDepartmentsService departmentsService;
+    @Autowired
+    private DepartmentsMapper departmentsMapper;
     @ApiOperation("获取部门信息列表")
     @GetMapping("/getList")
     public AjaxResult getList() {
-        List<Departments> list = departmentsService.list();
-        return AjaxResult.success(list);
+        //List<Departments> list = departmentsService.list();
+        LambdaQueryWrapper<Departments> lambdaQuery = new LambdaQueryWrapper<>();
+        List<Departments> departmentsList = departmentsMapper.selectList(lambdaQuery);
+        return AjaxResult.success(departmentsList);
     }
 
 
@@ -53,7 +60,9 @@ public class DepartmentsController {
     @ApiOperation("更新部门信息")
     @PutMapping("/update")
     public AjaxResult update(@RequestBody Departments departments) {
-        boolean b = departmentsService.updateById(departments);
-        return b?AjaxResult.success():AjaxResult.error();
+        LambdaQueryWrapper<Departments> updateWrapper = new LambdaQueryWrapper<>();
+        updateWrapper.eq(Departments::getDepartmentId,departments.getDepartmentId());
+        Integer b = departmentsMapper.update(departments, updateWrapper);
+        return b>0?AjaxResult.success():AjaxResult.error();
     }
 }

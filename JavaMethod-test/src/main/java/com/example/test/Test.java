@@ -21,10 +21,14 @@ public class Test {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Thread thread = new Thread(() -> {
+        /*Thread thread = new Thread(() -> {
             System.out.println("Hello, world!" + new Date());
         });
-        thread.run();
+        thread.run();*/
+
+        String str = "123456789";
+        Long aLong = Long.valueOf(str);
+        System.out.println(aLong);
     }
 
 }

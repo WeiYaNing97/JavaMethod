@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.points.mapper.OrdersMapper">
+    <resultMap id="ordersvo" type="com.example.points.entity.OrdersVO">
+        <result column="username" property="username"/>
+        <collection property="productsVOList" ofType="com.example.points.entity.ProductsVO">
+            <result column="product_name" property="productName"/>
+            <result column="product_description" property="productDescription"/>
+            <result column="quantity" property="quantity"/>
+            <result column="points_earned" property="pointsEarned"/>
+            <result column="is_deleted" property="isDeleted"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectUserPointsByUserId" resultType="int">
+        SELECT
+            SUM( quantity * points_earned )
+        FROM
+            `user_order`
+                JOIN orders ON orders.order_id = user_order.order_id
+        WHERE
+            user_order.user_id = #{userId}
+    </select>
+
+    <select id="selectOrdersVO" resultMap="ordersvo">
+        SELECT
+            users.username AS username,
+            orders.quantity AS quantity,
+            orders.points_earned AS points_earned,
+            products.product_name AS product_name,
+            products.product_description AS points_earned,
+            products.is_deleted AS is_deleted
+        FROM
+            users
+                JOIN `user_order` ON user_order.user_id = users.user_id
+                JOIN orders ON orders.order_id = user_order.order_id
+                JOIN products ON products.product_id = orders.product_id
+    </select>
+</mapper>
