@@ -9,6 +9,7 @@
         <module name="JavaMethod-user" />
         <module name="JavaMethod-mq-rabbitmq" />
         <module name="JavaMethod-swagger" />
+        <module name="JavaMethod-office" />
         <module name="JavaMethod-admin" />
         <module name="JavaMethod-utils" />
         <module name="JavaMethod-method" />
@@ -36,6 +37,7 @@
       <module name="JavaMethod-method" options="-parameters" />
       <module name="JavaMethod-mq-activemq" options="-parameters" />
       <module name="JavaMethod-mq-rabbitmq" options="-parameters" />
+      <module name="JavaMethod-office" options="-parameters" />
       <module name="JavaMethod-quartz" options="-parameters" />
       <module name="JavaMethod-security" options="-parameters" />
       <module name="JavaMethod-solr" options="-parameters" />

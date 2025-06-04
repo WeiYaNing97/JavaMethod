@@ -16,6 +16,7 @@
         <module>JavaMethod-quartz</module>
         <module>JavaMethod-websocket</module>
         <module>JavaMethod-mq-activemq</module>
+        <module>JavaMethod-office</module>
     </modules>
 
     <parent>
@@ -46,6 +47,10 @@
         <websocket.version>2.7.12</websocket.version>
         <fastjson.version>1.2.83</fastjson.version>
         <activemq.version>5.16.6</activemq.version>
+
+        <poi.version>5.2.3</poi.version>
+        <poi.ooxml.version>4.1.2</poi.ooxml.version>
+        <xmlbeans.version>5.1.1</xmlbeans.version>
     </properties>
 
     <dependencies>
@@ -202,6 +207,23 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Apache POI dependencies -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version> <!-- 请根据需要选择版本 -->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>${poi.ooxml.version}</version> <!-- 注意与poi-ooxml版本兼容 -->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>${xmlbeans.version}</version>
         </dependency>
     </dependencies>
 </project>
